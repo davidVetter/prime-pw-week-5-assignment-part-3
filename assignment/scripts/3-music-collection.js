@@ -18,10 +18,10 @@ function addToCollection(title, artist, year) {
     return addObj;
 }
 
-console.log('Lets test adding an album!', addToCollection('test1', 'David', 2005));
-console.log('Lets test adding an album!', addToCollection('test2', 'Name2', 2010));
-console.log(collection);
-console.log(collection[1]);
-collection[0].title = 'shouldChange'
-console.log(collection[0]);
-console.log(collection);
+console.log(addToCollection('test1', 'David', 2005));
+console.log(addToCollection('test2', 'Name2', 2010));
+console.log('Collection after adding ', collection);
+console.log('The 2nd albums in my collection is ', collection[1]);
+collection[0].title = 'shouldChange' // This for testing, REMOVE FROM FINISHED PRODUCT
+console.log('I just changed the title of the 1st album ', collection[0]);
+console.log('My collection includes ', collection);
