@@ -42,3 +42,23 @@ function showCollection(array) {
 
 showCollection(collection); // call showCollection function with collection array as argument
 
+// Function that searchs the given array by artist and returns a
+// new array with any matching
+function findByArtist(artist, array) {
+    let findArtist = artist; // variable for artist argument
+    let arr = array; // variable for the array argument
+    let results = []; // empty array for search results
+    for (let target of arr) { // for loop that searchs through given array of objects
+        if (target.artist === findArtist) { // match if artist property matches artist given
+            results.push(target); // add object if the artist match
+        }
+    }
+    return results; // returns the new array of results or an empty array
+}
+
+// Test data for findByArtist search function
+console.log('Lets see if AFI is here (should return a result)', findByArtist('AFI', collection));
+console.log('Lets see if Billy Joel is here (should return a result)', findByArtist('Billy Joel', collection));
+console.log('Lets see if Elton John is here (should return no result)', findByArtist('Elton John', collection));
+console.log('Lets see if The Used is here (should return a result)', findByArtist('The Used', collection));
+console.log('Lets see if Asking Alexandria is here (should return no result)', findByArtist('Asking Alexandria', collection));
