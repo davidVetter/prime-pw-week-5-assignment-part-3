@@ -62,3 +62,25 @@ console.log('Lets see if Billy Joel is here (should return a result)', findByArt
 console.log('Lets see if Elton John is here (should return no result)', findByArtist('Elton John', collection));
 console.log('Lets see if The Used is here (should return a result)', findByArtist('The Used', collection));
 console.log('Lets see if Asking Alexandria is here (should return no result)', findByArtist('Asking Alexandria', collection));
+
+// Function that 
+function search(object, array)  {
+    let target = object;
+    let arr = array;
+    let hasArt = target.hasOwnProperty('artist');
+    let hasTitle = target.hasOwnProperty('title');
+    let hasYear = target.hasOwnProperty('year');
+
+    if (hasArt === false && hasTitle === false && hasYear === false) {
+        showCollection(arr);
+    }
+    
+    console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`);
+    //for (let records of arr) {
+        //if (object.artist === records.artist) {
+
+       // }
+   // }
+}
+
+search({}, collection);
