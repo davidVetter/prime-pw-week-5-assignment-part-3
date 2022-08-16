@@ -63,6 +63,21 @@ console.log('Lets see if Elton John is here (should return no result)', findByAr
 console.log('Lets see if The Used is here (should return a result)', findByArtist('The Used', collection));
 console.log('Lets see if Asking Alexandria is here (should return no result)', findByArtist('Asking Alexandria', collection));
 
+// Function that searches by title
+
+function findByTitle(title, array) {
+    let findTitle = title; // variable for artist argument
+    let arr = array; // variable for the array argument
+    let results = []; // empty array for search results
+    for (let target of arr) { // for loop that searchs through given array of objects
+        if (target.title === findTitle) { // match if artist property matches artist given
+            results.push(target); // add object if the artist match
+        }
+    }
+    return results; // returns the new array of results or an empty array
+}
+//console.log('Calling find by Title ', findByTitle('Swan Songs', collection)); // Test findByTitle function
+
 // Function that 
 function search(object, array)  {
     let target = object;
@@ -70,17 +85,15 @@ function search(object, array)  {
     let hasArt = target.hasOwnProperty('artist');
     let hasTitle = target.hasOwnProperty('title');
     let hasYear = target.hasOwnProperty('year');
+    console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`);
 
     if (hasArt === false && hasTitle === false && hasYear === false) {
         showCollection(arr);
+    } else if (hasArt && hasTitle === false && hasYear === false) {
+        console.log(`Search Parameters: ${target.artist} \nResults:`, findByArtist(target.artist, arr));
+    } else if (hasArt === false && hasTitle === true && hasYear === false) {
+        console.log(`Search Parameters: ${target.title} \nResults:`, findByTitle(target.title, arr));
     }
-    
-    console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`);
-    //for (let records of arr) {
-        //if (object.artist === records.artist) {
-
-       // }
-   // }
 }
 
-search({}, collection);
+search({title: 'Swan Songs'}, collection);
