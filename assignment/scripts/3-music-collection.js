@@ -64,7 +64,6 @@ console.log('Lets see if The Used is here (should return a result)', findByArtis
 console.log('Lets see if Asking Alexandria is here (should return no result)', findByArtist('Asking Alexandria', collection));
 
 // Function that searches by title
-
 function findByTitle(title, array) {
     let findTitle = title; // variable for artist argument
     let arr = array; // variable for the array argument
@@ -78,7 +77,23 @@ function findByTitle(title, array) {
 }
 //console.log('Calling find by Title ', findByTitle('Swan Songs', collection)); // Test findByTitle function
 
-// Function that 
+// Function for searches by year
+function findByYear(year, array) {
+    let findYear = year; // variable for artist argument
+    let arr = array; // variable for the array argument
+    let results = []; // empty array for search results
+    for (let target of arr) { // for loop that searchs through given array of objects
+        if (target.year === findYear) { // match if artist property matches artist given
+            results.push(target); // add object if the artist match
+        }
+    }
+    return results; // returns the new array of results or an empty array
+} // end findByYear Function
+
+//console.log('Calling find by Year ', findByYear(2003, collection));
+
+// Function that accepts an object properties as argument and an array.
+// Searches for object in array based on properties given
 function search(object, array)  {
     let target = object;
     let arr = array;
@@ -91,9 +106,11 @@ function search(object, array)  {
         showCollection(arr);
     } else if (hasArt && hasTitle === false && hasYear === false) {
         console.log(`Search Parameters: ${target.artist} \nResults:`, findByArtist(target.artist, arr));
-    } else if (hasArt === false && hasTitle === true && hasYear === false) {
+    } else if (hasArt === false && hasTitle && hasYear === false) {
         console.log(`Search Parameters: ${target.title} \nResults:`, findByTitle(target.title, arr));
+    } else if (hasArt === false && hasTitle === false && hasYear) {
+        console.log(`Search Parameters: ${target.year} \nResults:`, findByYear(target.year, arr));
     }
-}
+} // end search Function
 
-search({title: 'Swan Songs'}, collection);
+search({year: 2003}, collection);
