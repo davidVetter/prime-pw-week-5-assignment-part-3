@@ -90,7 +90,21 @@ function findByYear(year, array) {
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-//console.log('Calling find by Year ', findByYear(2003, collection));
+//console.log('Calling find by Year ', findByYear(2003, collection)); // Test findByYear function
+
+// Function that searchs by artist AND title
+function findByAandT(artist, title, array) {
+    let findArtist = artist; // variable for artist argument
+    let findTitle = title;
+    let arr = array; // variable for the array argument
+    let results = []; // empty array for search results
+    for (let target of arr) { // for loop that searchs through given array of objects
+        if (target.artist === findArtist && target.title === findTitle) { // match if artist property matches artist given
+            results.push(target); // add object if the artist match
+        }
+    }
+    return results; // returns the new array of results or an empty array
+} // end findByYear Function
 
 // Function that accepts an object properties as argument and an array.
 // Searches for object in array based on properties given
@@ -110,7 +124,9 @@ function search(object, array)  {
         console.log(`Search Parameters: ${target.title} \nResults:`, findByTitle(target.title, arr));
     } else if (hasArt === false && hasTitle === false && hasYear) {
         console.log(`Search Parameters: ${target.year} \nResults:`, findByYear(target.year, arr));
+    } else if (hasArt && hasTitle && hasYear === false) {
+        console.log(`Search Parameters: ${target.artist} and ${target.title}`, findByAandT(target.artist, target.title, arr));
     }
 } // end search Function
 
-search({year: 2003}, collection);
+search({artist: 'Billy Joel', title: '52nd Street'}, collection);
