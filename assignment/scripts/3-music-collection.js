@@ -51,8 +51,8 @@ function findByArtist(artist, array) {
     for (let target of arr) { // for loop that searchs through given array of objects
         if (target.artist === findArtist) { // match if artist property matches artist given
             results.push(target); // add object if the artist match
-        }
-    }
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 }
 
@@ -65,28 +65,28 @@ console.log('Lets see if Asking Alexandria is here (should return no result)', f
 
 // Function that searches by title
 function findByTitle(title, array) {
-    let findTitle = title; // variable for artist argument
+    let findTitle = title; // variable for title argument
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.title === findTitle) { // match if artist property matches artist given
-            results.push(target); // add object if the artist match
-        }
-    }
+        if (target.title === findTitle) { // match if title property matches artist given
+            results.push(target); // add object if the title match
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 }
 //console.log('Calling find by Title ', findByTitle('Swan Songs', collection)); // Test findByTitle function
 
 // Function for searches by year
 function findByYear(year, array) {
-    let findYear = year; // variable for artist argument
+    let findYear = year; // variable for year argument
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.year === findYear) { // match if artist property matches artist given
-            results.push(target); // add object if the artist match
-        }
-    }
+        if (target.year === findYear) { // match if year property matches artist given
+            results.push(target); // add object if the year match
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
@@ -95,28 +95,28 @@ function findByYear(year, array) {
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
     let findArtist = artist; // variable for artist argument
-    let findTitle = title;
+    let findTitle = title; // variable for the title argument
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.title === findTitle) { // match if artist property matches artist given
-            results.push(target); // add object if the artist match
-        }
-    }
+        if (target.artist === findArtist && target.title === findTitle) { // match if artist and title property matches artist given
+            results.push(target); // add object if both match
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
 // Function to search by artist AND year
 function findByAandY(artist, year, array) {
     let findArtist = artist; // variable for artist argument
-    let findYear = year;
+    let findYear = year; // variable for the year argument
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.year === findYear) { // match if artist property matches artist given
-            results.push(target); // add object if the artist match
-        }
-    }
+        if (target.artist === findArtist && target.year === findYear) { // match if artist and year property matches artist given
+            results.push(target); // add object if both match
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
@@ -124,15 +124,15 @@ function findByAandY(artist, year, array) {
 
 // Function to search by title AND year
 function findByTandY(title, year, array) {
-    let findTitle = title; // variable for artist argument
-    let findYear = year;
+    let findTitle = title; // variable for title argument
+    let findYear = year; // variable for year argument
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.title === findTitle && target.year === findYear) { // match if artist property matches artist given
+        if (target.title === findTitle && target.year === findYear) { // match if title and year property matches artist given
             results.push(target); // add object if the artist match
-        }
-    }
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
@@ -146,10 +146,10 @@ function findByATY(artist, title, year, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.title === findTitle && target.year === findYear) { // match if artist property matches artist given
-            results.push(target); // add object if the artist match
-        }
-    }
+        if (target.artist === findArtist && target.title === findTitle && target.year === findYear) { // match if artist, title and year property matches artist given
+            results.push(target); // add object if all match
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
@@ -163,13 +163,17 @@ function search(object, array)  {
     let arrDefault = collection;
 
     if (arr === undefined){ // Check if an array to search was passed or uses "collection"
-        console.log(`You didn't give me a collection to search - Using default`); // message acknowleding no array passed
+        console.log(`No collection selection - Using default`); // message acknowleding no array passed
+        arr = arrDefault; // sets default to be used
+    } else if (arr === ''){ // Check if an array to search was passed or uses "collection"
+        console.log(`No collection selection - Using default`); // message acknowleding no array passed
         arr = arrDefault; // sets default to be used
     }
 
     if (target === undefined) { // Checks if nothing was passed as object in search
-        showCollection(arr); // Shows whole collection when no object
-        return;
+        return arr; // return full collection
+    } else if (target === '') { // Checks if nothing was passed as object in search
+        return arr; // return full collection
     }
     
     let hasArt = target.hasOwnProperty('artist'); // Checks if passed object has property artist
@@ -178,23 +182,41 @@ function search(object, array)  {
     //console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`); // Test log to track property checks worked correctly
     
     if (hasArt === false && hasTitle === false && hasYear === false) { // if empty object passed
-        showCollection(arr);
+        console.log('No search parameters given - Displaying all');
+        return arr; // return full collection
     } else if (hasArt && hasTitle === false && hasYear === false) { // if artist used to search
-        console.log(`Search Parameters: ${target.artist} \nResults:`, findByArtist(target.artist, arr));
+        console.log(`Search Parameters: ${target.artist}`); // Log search parameters used
+        return findByArtist(target.artist, arr); // Return results of function findByArtist
     } else if (hasArt === false && hasTitle && hasYear === false) { // if title used to search
-        console.log(`Search Parameters: ${target.title} \nResults:`, findByTitle(target.title, arr));
+        console.log(`Search Parameters: ${target.title}`); // Log search parameters used
+        return findByTitle(target.title, arr); // Return results of findByTitle function
     } else if (hasArt === false && hasTitle === false && hasYear) { // if year used to search
-        console.log(`Search Parameters: ${target.year} \nResults:`, findByYear(target.year, arr));
+        console.log(`Search Parameters: ${target.year}`); // Log search parameters used
+        return findByYear(target.year, arr); // Return results of findByYear function
     } else if (hasArt && hasTitle && hasYear === false) { // if artist and title used to search
-        console.log(`Search Parameters: ${target.artist} and ${target.title}`, findByAandT(target.artist, target.title, arr));
+        console.log(`Search Parameters: ${target.artist} and ${target.title}`); // Log search parameters
+        return findByAandT(target.artist, target.title, arr); // return results of findByAandT
     } else if (hasArt && hasTitle === false && hasYear) { // if artist and year used to search
-        console.log(`Search Parameters: ${target.artist} and ${target.year}`, findByAandY(target.artist, target.year, arr));
+        console.log(`Search Parameters: ${target.artist} and ${target.year}`); // log search parameters
+        return findByAandY(target.artist, target.year, arr); // returns results of findByAandY
     } else if (hasArt === false && hasTitle && hasYear) { // if title and year used to search
         console.log(`Search Parameters: ${target.title} and ${target.year}`); // Log search parameters used
         return findByTandY(target.title, target.year, arr); // return results of function findByTandY
     } else if (hasArt && hasTitle && hasYear) { // if artist, title and year used to search
-        console.log(`Search Parameters: ${target.artist}, ${target.title} and ${target.year}`, findByATY(target.artist, target.title, target.year, arr));
+        console.log(`Search Parameters: ${target.artist}, ${target.title} and ${target.year}`); // Log search parameters used
+        return findByATY(target.artist, target.title, target.year, arr); // Return results of findByATY function
     } // end else/ifs
 } // end search Function
 
-console.log('Search Results: ', search({title: 'Sing The Sorrow', year: 2003}, collection));
+//Search test logs
+console.log('Search Results: ', search({artist: 'Billy Joel', title: '52nd Street', year: 1978}, collection));
+console.log('Search Results: ', search({artist: 'Billy Joel', title: '52nd Street'}, collection));
+console.log('Search Results: ', search({artist: 'Billy Joel', year: 1978}, collection));
+console.log('Search Results: ', search({title: '52nd Street', year: 1978}, collection));
+console.log('Search Results: ', search({artist: 'Billy Joel'}, collection));
+console.log('Search Results: ', search({title: '52nd Street'}, collection));
+console.log('Search Results: ', search({year: 1978}, collection));
+console.log('Search Results: ', search({}, collection));
+console.log('Search Results: ', search({}));
+console.log('Search Results: ', search());
+console.log('Search Results: ', search('', ''));
