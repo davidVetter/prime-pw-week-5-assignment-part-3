@@ -36,7 +36,7 @@ function showCollection(array) {
     let arr = array // variable for the argument
     console.log(`The number of items in this collection is ${arr.length}`); // logs number in given array
     for (let record of arr) { // for loop to go through given array
-        console.log(`${record.title} by ${record.artist}, published in ${record.year}`); // foramtted log of each object
+        console.log(`${record.title.toUpperCase()} by ${record.artist.toUpperCase()}, published in ${record.year}`); // foramtted log of each object
     } // end for loop
 } // end showCollection function
 
@@ -49,7 +49,7 @@ function findByArtist(artist, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist) { // match if artist property matches artist given
+        if (target.artist === findArtist || target.artist.toUpperCase() === findArtist || target.artist.toLowerCase() === findArtist) { // match if artist property matches artist given
             results.push(target); // add object if the artist match
         } // end if
     } // end for loop
@@ -69,7 +69,7 @@ function findByTitle(title, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.title === findTitle) { // match if title property matches artist given
+        if (target.title === findTitle || target.title.toUpperCase() === findTitle || target.title.toLowerCase() === findTitle) { // match if title property matches artist given
             results.push(target); // add object if the title match
         } // end if
     } // end for loop
@@ -99,7 +99,11 @@ function findByAandT(artist, title, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.title === findTitle) { // match if artist and title property matches artist given
+        if 
+        ((target.artist === findArtist && target.title === findTitle) || // OR
+        (target.artist.toUpperCase() === findArtist && target.title.toUpperCase() === findTitle) || //OR
+        (target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle)) 
+        { // match if artist and title property matches artist given
             results.push(target); // add object if both match
         } // end if
     } // end for loop
@@ -113,7 +117,10 @@ function findByAandY(artist, year, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.year === findYear) { // match if artist and year property matches artist given
+        if ((target.artist === findArtist && target.year === findYear) || // OR
+        (target.artist.toUpperCase() === findArtist && target.year === findYear) || // OR     ****I don't know if this is the best way to do these lines
+        (target.artist.toLowerCase() === findArtist && target.year === findYear))    //           but they got pretty long
+        { // match if artist and year property matches artist given
             results.push(target); // add object if both match
         } // end if
     } // end for loop
@@ -129,7 +136,10 @@ function findByTandY(title, year, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.title === findTitle && target.year === findYear) { // match if title and year property matches artist given
+        if ((target.title === findTitle && target.year === findYear) || // OR
+        (target.title.toUpperCase() === findTitle && target.year === findYear) || // OR
+        (target.title.toLowerCase() === findTitle && target.year === findYear)) 
+        { // match if title and year property matches artist given
             results.push(target); // add object if the artist match
         } // end if
     } // end for loop
@@ -146,7 +156,9 @@ function findByATY(artist, title, year, array) {
     let arr = array; // variable for the array argument
     let results = []; // empty array for search results
     for (let target of arr) { // for loop that searchs through given array of objects
-        if (target.artist === findArtist && target.title === findTitle && target.year === findYear) { // match if artist, title and year property matches artist given
+        if ((target.artist === findArtist && target.title === findTitle && target.year === findYear) ||
+        (target.artist.toUpperCase() === findArtist && target.title.toUpperCase() === findTitle && target.year === findYear) ||
+        (target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle && target.year === findYear)) { // match if artist, title and year property matches artist given
             results.push(target); // add object if all match
         } // end if
     } // end for loop
@@ -182,7 +194,7 @@ function search(object, array)  {
     //console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`); // Test log to track property checks worked correctly
     
     if (hasArt === false && hasTitle === false && hasYear === false) { // if empty object passed
-        console.log('No search parameters given - Displaying all');
+        console.log('No search parameters given - Displaying all'); // log message that collection was selected
         return arr; // return full collection
     } else if (hasArt && hasTitle === false && hasYear === false) { // if artist used to search
         console.log(`Search Parameters: ${target.artist}`); // Log search parameters used
@@ -208,7 +220,7 @@ function search(object, array)  {
     } // end else/ifs
 } // end search Function
 
-//Search test logs
+// Search Function test logs
 console.log('Search Results: ', search({artist: 'Billy Joel', title: '52nd Street', year: 1978}, collection));
 console.log('Search Results: ', search({artist: 'Billy Joel', title: '52nd Street'}, collection));
 console.log('Search Results: ', search({artist: 'Billy Joel', year: 1978}, collection));
@@ -220,3 +232,7 @@ console.log('Search Results: ', search({}, collection));
 console.log('Search Results: ', search({}));
 console.log('Search Results: ', search());
 console.log('Search Results: ', search('', ''));
+console.log('Search Resutls: ', search({title: 'sing the sorrow'}, collection));
+console.log('Search Results: ', search({artist: 'billy joel'}, collection));
+console.log('Search Results: ', search({artist: 'THE USED', title: 'MAYBE MEMORIES'}, collection));
+console.log('Search Results: ', search({artist: 'the used', title: 'maybe memories', year: 2003}, collection));
