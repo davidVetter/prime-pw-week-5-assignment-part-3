@@ -170,13 +170,15 @@ function findByATY(artist, title, year, array) {
 
 //console.log('Calling the findByATY function ', findByATY('AFI', 'Sing The Sorrow', 2003, collection)); // Testing findByATY function
 
+// This function checks if the passed array is empty and assigns a default value if it was
+// Returns original array passed if it isn't empty
 function collectionCheck(array) {
-    let arr = array;
+    let arr = array; // variable for argument
     if (arr === undefined || arr === ''){ // Check if an array to search was passed or uses "collection"
         console.log(`No collection selected - Using default`); // message acknowleding no array passed
-        return arrDefault; // sets default to be used
+        return arrDefault; // returns "default" value
     } else {
-        return arr;
+        return arr; // returns original array passed if array not empty
     }
 }
 
@@ -185,12 +187,6 @@ function collectionCheck(array) {
 function search(object, array)  {
     let target = object;
     let arr = collectionCheck(array);
-    //let arrDefault = collection;
-
-    //if (arr === undefined || arr === ''){ // Check if an array to search was passed or uses "collection"
-      //  console.log(`No collection selected - Using default`); // message acknowleding no array passed
-        //arr = arrDefault; // sets default to be used
-    //}
 
     if (target === undefined || target === '') { // Checks if nothing was passed as object in search
         console.log('No search parameters given - Displaying all'); // message acknowleding no search parameters
@@ -246,3 +242,56 @@ console.log('Search Resutls: ', search({title: 'sing the sorrow'}, collection));
 console.log('Search Results: ', search({artist: 'billy joel'}, collection));
 console.log('Search Results: ', search({artist: 'THE USED', title: 'MAYBE MEMORIES'}, collection));
 console.log('Search Results: ', search({artist: 'the used', title: 'maybe memories', year: 2003}, collection));
+
+// Function appears to be adding track names to albums if it matches????
+// This function accepts track names and times as an array of object, an artist, album title, year published and collection.
+// It will then search the collection for matching artist, title and year then add the tracks
+// If no match a message is displayed
+function addTrack(trackArr, artist, title, year, array) {
+    let addTrack = trackArr;
+    let addArtist = artist;
+    let addTitle = title;
+    let addYear = year;
+    let arr = collectionCheck(array);
+    let didAdd = false;
+    for (let record of arr) {
+        if (record.artist === addArtist && record.title === addTitle && record.year === addYear) {
+                record.tracks = addTrack;
+                didAdd = true;
+        }
+    }
+    if (didAdd === false) {
+        console.log('No matches found! No tracks added.');
+        return false;
+    } else if (didAdd) {
+        return addTrack;
+    }
+}
+
+console.log('Adding tracks to AFI - Sing The Sorrow', addTrack([{trackName: 'Bleed Black', time: '4:18'}, {trackName: 'Girls Not Grey', time: '3:48'}], 'AFI', 'Sing The Sorrow', 2003, collection));
+console.log('Trying to add tracks with bad info ', addTrack([{trackName: 'testSong1', time: '4:18'}, {trackName: 'testSong2', time: '3:48'}], 'Billy Joel', '52nd Street', 2003, collection));
+console.log('Showing tracks in AFI ', collection[4].tracks);
+console.log('Checking if tracks were added to Billy Joel - 52nd Street', collection[0].tracks);
+console.log('Collection ', collection);
+console.log('Adding tracks to Billy Joel - 52nd Street', addTrack([{trackName: 'Big Shot', time: '4:03'}, {trackName: 'My Life', time: '4:44'}], 'Billy Joel', '52nd Street', 1978, collection));
+console.log('Collection ', collection);
+console.log('Tracks for Billy Joel - 52nd Street', collection[0].tracks);
+console.log('Testing if duplicate will add', addTrack([{trackName: 'Bleed Black', time: '4:18'}, {trackName: 'Girls Not Grey', time: '3:48'}], 'AFI', 'Sing The Sorrow', 2003, collection));
+console.log('AFI - Sing The Sorrow tracks are: ', collection[4].tracks);
+console.log(collection);
+
+1234
+134
+124
+123
+14
+13
+12
+1
+234
+24
+23
+2
+34
+3
+4
