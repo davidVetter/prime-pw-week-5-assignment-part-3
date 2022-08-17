@@ -35,9 +35,17 @@ console.log('The 3rd albums in my collection is ', collection[2]);
 // and their contents in a readable format
 function showCollection(array) {
     let arr = array // variable for the argument
+    let c = 0;
     console.log(`The number of items in this collection is ${arr.length}`); // logs number in given array
     for (let record of arr) { // for loop to go through given array
         console.log(`${record.title.toUpperCase()} by ${record.artist.toUpperCase()}, published in ${record.year}`); // foramtted log of each object
+        if (record.hasOwnProperty('tracks')) {
+                while (c < record.tracks.length) {
+                    console.log(`${c + 1}. ${record.tracks[c].trackName.toUpperCase()}: ${record.tracks[c].time}`);
+                    c++;
+                }
+        }
+        c = 0;
     } // end for loop
 } // end showCollection function
 
@@ -248,25 +256,25 @@ console.log('Search Results: ', search({artist: 'the used', title: 'maybe memori
 // It will then search the collection for matching artist, title and year then add the tracks
 // If no match a message is displayed
 function addTrack(trackArr, artist, title, year, array) {
-    let addTrack = trackArr;
-    let addArtist = artist;
-    let addTitle = title;
-    let addYear = year;
-    let arr = collectionCheck(array);
-    let didAdd = false;
-    for (let record of arr) {
-        if (record.artist === addArtist && record.title === addTitle && record.year === addYear) {
-                record.tracks = addTrack;
-                didAdd = true;
+    let addTrack = trackArr; // variable for array of objects argument
+    let addArtist = artist; // variable for artist argument
+    let addTitle = title; // variable for title argument
+    let addYear = year; // variable for year argument
+    let arr = collectionCheck(array); // sets a default collection if no collection passed
+    let didAdd = false; // track added toggle
+    for (let record of arr) { // for loop for go through collection
+        if (record.artist === addArtist && record.title === addTitle && record.year === addYear) { // check if artist, title, and year match
+                record.tracks = addTrack; // add tracks property with value passed to matching object
+                didAdd = true; // toggle if song was added
         }
     }
-    if (didAdd === false) {
-        console.log('No matches found! No tracks added.');
+    if (didAdd === false) { // check if a track was added
+        console.log('No matches found! No tracks added.'); // log message if not
         return false;
     } else if (didAdd) {
-        return addTrack;
-    }
-}
+        return addTrack; // returns tracks added
+    } // end if else
+} // end addTrack function
 
 console.log('Adding tracks to AFI - Sing The Sorrow', addTrack([{trackName: 'Bleed Black', time: '4:18'}, {trackName: 'Girls Not Grey', time: '3:48'}], 'AFI', 'Sing The Sorrow', 2003, collection));
 console.log('Trying to add tracks with bad info ', addTrack([{trackName: 'testSong1', time: '4:18'}, {trackName: 'testSong2', time: '3:48'}], 'Billy Joel', '52nd Street', 2003, collection));
@@ -280,18 +288,30 @@ console.log('Testing if duplicate will add', addTrack([{trackName: 'Bleed Black'
 console.log('AFI - Sing The Sorrow tracks are: ', collection[4].tracks);
 console.log(collection);
 
-1234
+
+showCollection(collection);
+
+// ********* CREATE A SINGLE TRACK ADD FUNCTION ************ //
+/* Make it accept song name as string, time as string, artist name, album title, year published and colleciton
+Can I use find or index array methods to check for matching album?? See week 3 or other previous assignments on array
+*/
+
+
+//Asterisk means done, non means need to add if/else
+
+/*1234
 134
 124
-123
+123*
 14
-13
-12
-1
+13*
+12*
+1*
 234
 24
-23
-2
+23*
+2*
 34
-3
+3*
 4
+0*/
