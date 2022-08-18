@@ -11,13 +11,23 @@ function addToCollection(title, artist, year, tracks) {
   let addArtist = artist; // variable for artist argument
   let pubYear = year; // variable for year argument
   let addTracks = tracks;
-  const addObj = {
-    // create new object
-    title: addTitle, // title of album property
-    artist: addArtist, // artist property
-    year: pubYear, // year published property
-    tracks: addTracks // array of tracks with name and duration properties
-  };
+  let addObj = {};
+  if (tracks === undefined) {
+     addObj = {
+      // create new object
+      title: addTitle, // title of album property
+      artist: addArtist, // artist property
+      year: pubYear, // year published property
+    };
+  } else {
+     addObj = {
+      // create new object
+      title: addTitle, // title of album property
+      artist: addArtist, // artist property
+      year: pubYear, // year published property
+      tracks: addTracks, // array of tracks with name and duration properties
+    };
+  }
   //console.log('This is what is being added', addObj); // tracking function logs
   //console.log('Collection prior to push', collection);
   collection.push(addObj); // add new object to array collection
@@ -45,16 +55,13 @@ console.log(
   ])
 );
 console.log(
-  addToCollection("Maybe Memories", "The Used", 2003, [
+  addToCollection("In Love and Death", "The Used", 2003, [
     { trackName: "Take It Away", time: "3:37" },
     { trackName: "Listening", time: "2:46" },
     { trackName: "Sound Effects and Overdramatics", time: "3:28" },
   ])
 );
-console.log(addToCollection("Sing The Sorrow", "AFI", 2003, [
-    { trackName: "Bleed Black", time: "4:18" },
-    { trackName: "Girls Not Grey", time: "3:48" },
-  ]));
+console.log(addToCollection("Sing The Sorrow", "AFI", 2003));
 console.log(
   addToCollection("Swan Songs", "Hollywood Undead", 2008, [
     { trackName: "Undead", time: "4:25" },
@@ -174,28 +181,29 @@ function findByYear(year, array) {
 
 //console.log('Calling find by Year ', findByYear(2003, collection)); // Test findByYear function
 
-// Function that searches by year
+// Function that searches by Track
 function findByTrack(track, array) {
     //let findTrack = track; // variable for year argument
     let arr = collectionCheck(array); // variable for the array argument
-    let c = 0;
     let results = [];
     //let trackArr = (Object.values(array.tracks));
     for (let target of arr) {
-        let trackArr = (Object.values(target.tracks));
-        for (let i = 0; i < trackArr.length; i++) {
-            if (trackArr[i].trackName === track) {
-                results.push(target);
-            }
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks));
+            for (let i = 0; i < trackArr.length; i++) {
+                if (trackArr[i].trackName === track) {
+                    results.push(target);
+                }
+            }    
         }
     }
     return results; // returns the new array of results or an empty array
   } // end findByYear Function
 
-console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Bleed Black'));
-console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Listening'));
-console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Rodeo'));
-console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Big Shot'));
+console.log('%cCalling findByTrack function for Bleed Black(should not exist yet)', 'color: #FF0000', findByTrack('Bleed Black'));
+console.log('%cCalling findByTrack function for Listening', 'color: #66ff00', findByTrack('Listening'));
+console.log('%cCalling findByTrack function for Rodeo', 'color: #66ff00', findByTrack('Rodeo'));
+console.log('%cCalling findByTrack function for Big Shot', 'color: #66ff00', findByTrack('Big Shot'));
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -244,6 +252,25 @@ function findByAandY(artist, year, array) {
 } // end findByYear Function
 
 //console.log('Calling the findByAandY function ', findByAandY('AFI', 2003, collection)); // Test findByAandY function
+
+// Function that searches by Track AND Artist
+function findByTrackAndArt(track, artist, array) {
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = [];
+    for (let target of arr) {
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+            for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                if (trackArr[i].trackName === track && target.artist === artist) { // check if trackName for current element of track array is equal to request track and artist matches
+                    results.push(target); // push object to results array
+                }
+            }
+        }
+    }
+    return results; // returns the new array of results or an empty array
+  } // end findByYear Function
+
+  console.log('%cCalling findByTrackAndArt function for Bleed Black by AFI', 'color: #66ff00', findByTrackAndArt('Bleed Black', 'AFI'));
 
 // Function to search by title AND year
 function findByTandY(title, year, array) {
@@ -396,12 +423,12 @@ console.log(
 console.log("Search Results: ", search({ artist: "billy joel" }, collection));
 console.log(
   "Search Results: ",
-  search({ artist: "THE USED", title: "MAYBE MEMORIES" }, collection)
+  search({ artist: "THE USED", title: "IN LOVE AND DEATH" }, collection)
 );
 console.log(
   "Search Results: ",
   search(
-    { artist: "the used", title: "maybe memories", year: 2003 },
+    { artist: "the used", title: "in love and death", year: 2003 },
     collection
   )
 );
@@ -505,6 +532,7 @@ console.log(collection);
 showCollection(collection);
 console.log(findByArtist("Billy Joel"));
 console.log(findByTitle("52nd Street"));
+console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
 
 // ********* CREATE A SINGLE TRACK ADD FUNCTION ************ //
 /* Make it accept song name as string, time as string, artist name, album title, year published and colleciton
@@ -527,5 +555,5 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 2*
 34
 3*
-4
+4*
 0*/
