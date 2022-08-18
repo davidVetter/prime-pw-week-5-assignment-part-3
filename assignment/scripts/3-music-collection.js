@@ -51,7 +51,10 @@ console.log(
     { trackName: "Sound Effects and Overdramatics", time: "3:28" },
   ])
 );
-console.log(addToCollection("Sing The Sorrow", "AFI", 2003));
+console.log(addToCollection("Sing The Sorrow", "AFI", 2003, [
+    { trackName: "Bleed Black", time: "4:18" },
+    { trackName: "Girls Not Grey", time: "3:48" },
+  ]));
 console.log(
   addToCollection("Swan Songs", "Hollywood Undead", 2008, [
     { trackName: "Undead", time: "4:25" },
@@ -66,21 +69,21 @@ console.log("The 3rd albums in my collection is ", collection[2]);
 function showCollection(array) {
   let arr = array; // variable for the argument
   let c = 0;
-  console.log(`The number of items in this collection is ${arr.length}`); // logs number in given array
+  console.log(`%cTOTAL COLLECTION: ${arr.length}`, 'background: #4e182f; color: #f09605'); // logs number in given array
   for (let record of arr) {
     // for loop to go through given array
     console.log(
-      `${record.title.toUpperCase()} by ${record.artist.toUpperCase()}, published in ${
+      `%c${record.title.toUpperCase()} by ${record.artist.toUpperCase()}, published in ${
         record.year
-      }`
+      }`, 'background: #8f2d56; color: #fbb13c'
     ); // foramtted log of each object
     if (record.hasOwnProperty("tracks")) {
         if (!(record.tracks === undefined)) {
             while (c < record.tracks.length) {
                 console.log(
-                `${c + 1}. ${record.tracks[c].trackName.toUpperCase()}: ${
+                `%c${c + 1}. ${record.tracks[c].trackName.toUpperCase()}: ${
                     record.tracks[c].time
-                }`
+                }`, 'background: #fbb13c; color: #d81159'
                 );
                 c++;
             }
@@ -114,22 +117,22 @@ function findByArtist(artist, array) {
 
 // Test data for findByArtist search function
 console.log(
-  "Lets see if AFI is here (should return a result)",
+  "%cLets see if AFI is here (should return a result)", 'background: #9fd356; color: #342e37',
   findByArtist("AFI", collection)
 );
 console.log(
-  "Lets see if Billy Joel is here (should return a result)",
+  "%cLets see if Billy Joel is here (should return a result)", 'background: #9fd356; color: #342e37',
   findByArtist("Billy Joel")
 );
-console.log(
+console.error(
   "Lets see if Elton John is here (should return no result)",
   findByArtist("Elton John")
 );
 console.log(
-  "Lets see if The Used is here (should return a result)",
+  "%cLets see if The Used is here (should return a result)", 'background: #9fd356; color: #342e37',
   findByArtist("The Used", collection)
 );
-console.log(
+console.error(
   "Lets see if Asking Alexandria is here (should return no result)",
   findByArtist("Asking Alexandria", collection)
 );
@@ -170,6 +173,29 @@ function findByYear(year, array) {
 } // end findByYear Function
 
 //console.log('Calling find by Year ', findByYear(2003, collection)); // Test findByYear function
+
+// Function that searches by year
+function findByTrack(track, array) {
+    //let findTrack = track; // variable for year argument
+    let arr = collectionCheck(array); // variable for the array argument
+    let c = 0;
+    let results = [];
+    //let trackArr = (Object.values(array.tracks));
+    for (let target of arr) {
+        let trackArr = (Object.values(target.tracks));
+        for (var i=0; i < trackArr.length; i++) {
+            if (trackArr[i].trackName === track) {
+                results.push(target);
+            }
+        }
+    }
+    return results; // returns the new array of results or an empty array
+  } // end findByYear Function
+
+console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Bleed Black'));
+console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Listening'));
+console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Rodeo'));
+console.log('%cCalling findByTrack function', 'color: #66ff00', findByTrack('Big Shot'));
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -276,7 +302,7 @@ function collectionCheck(array) {
   let arr = array; // variable for argument
   if (arr === undefined || arr === "") {
     // Check if an array to search was passed or uses "collection"
-    console.log(`No collection selected - Using default`); // message acknowleding no array passed
+    console.warn(`No collection selected - Using default`); // message acknowleding no array passed
     return arrDefault; // returns "default" value
   } else {
     return arr; // returns original array passed if array not empty
@@ -291,7 +317,7 @@ function search(object, array) {
 
   if (target === undefined || target === "") {
     // Checks if nothing was passed as object in search
-    console.log("No search parameters given - Displaying all"); // message acknowleding no search parameters
+    console.warn("No search parameters given - Displaying all"); // message acknowleding no search parameters
     return arr; // return full collection
   }
 
@@ -302,11 +328,11 @@ function search(object, array) {
 
   if (hasArt === false && hasTitle === false && hasYear === false) {
     // if empty object passed
-    console.log("No search parameters given - Displaying all"); // log message that collection was selected
+    console.warn("No search parameters given - Displaying all"); // log message that collection was selected
     return arr; // return full collection
   } else if (hasArt && hasTitle === false && hasYear === false) {
     // if artist used to search
-    console.log(`Search Parameters: ${target.artist}`); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.artist}`, 'color: #ef2d56'); // Log search parameters used
     return findByArtist(target.artist, arr); // Return results of function findByArtist
   } else if (hasArt === false && hasTitle && hasYear === false) {
     // if title used to search
@@ -376,10 +402,10 @@ console.log(
   )
 );
 
-// Function appears to be adding track names to albums if it matches????
+
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
 // It will then search the collection for matching artist, title and year then add the tracks
-// If no match a message is displayed
+// If no match a message is displayed - If the track exists, it is not duplicated
 function addTrack(trackArr, artist, title, year, array) {
   let addTrack = trackArr; // variable for array of objects argument
   let addArtist = artist; // variable for artist argument
@@ -401,7 +427,7 @@ function addTrack(trackArr, artist, title, year, array) {
   }
   if (didAdd === false) {
     // check if a track was added
-    console.log("No matches found! No tracks added."); // log message if not
+    console.warn("No matches found! No tracks added."); // log message if not
     return false;
   } else if (didAdd) {
     return addTrack; // returns tracks added
@@ -409,7 +435,7 @@ function addTrack(trackArr, artist, title, year, array) {
 } // end addTrack function
 
 console.log(
-  "Adding tracks to AFI - Sing The Sorrow",
+  "%cAdding tracks to AFI - Sing The Sorrow", 'color: #66ff00',
   addTrack(
     [
       { trackName: "Bleed Black", time: "4:18" },
@@ -421,7 +447,7 @@ console.log(
     collection
   )
 );
-console.log(
+console.warn(
   "Trying to add tracks with bad info ",
   addTrack(
     [
