@@ -295,6 +295,26 @@ function findByTandY(title, year, array) {
 //console.log('Calling the findByTandY function ', findByTandY('Maybe Memories', 2003, collection)); // Test the findByTandY function
 
 // Function that searches by Track AND Title
+function findByTrackAndYear(track, year, array) {
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = [];
+    for (let target of arr) {
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+            for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                if (trackArr[i].trackName === track && target.year === year) { // check if trackName for current element of track array is equal to request track and title matches
+                    results.push(target); // push object to results array
+                }
+            }
+        }
+    }
+    return results; // returns the new array of results or an empty array
+  } // end findByTrackAndTitle Function
+
+  console.log('%cCalling findByTrackAndYear function for Big Shot in 1978', 'color: #66ff00', findByTrackAndYear('Big Shot', 1978));
+  console.log('%cCalling findByTrackAndYear function for Big Shot in 1980 (Should not exist)', 'color: #FF0000', findByTrackAndYear('Big Shot', 1980));
+
+  // Function that searches by Track AND Title
 function findByTrackAndTitle(track, title, array) {
     let arr = collectionCheck(array); // variable for the array argument
     let results = [];
@@ -311,8 +331,8 @@ function findByTrackAndTitle(track, title, array) {
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
-  console.log('%cCalling findByTrackAndArt function for Big Shot on 52nd Street', 'color: #66ff00', findByTrackAndTitle('Big Shot', '52nd Street'));
-  console.log('%cCalling findByTrackAndArt function for Big Shot on Sing The Sorrow (Should not exist)', 'color: #FF0000', findByTrackAndTitle('Big Shot', 'Sing The Sorrow'));
+  console.log('%cCalling findByTrackAndTitle function for Big Shot on 52nd Street', 'color: #66ff00', findByTrackAndTitle('Big Shot', '52nd Street'));
+  console.log('%cCalling findByTrackAndTitle function for Big Shot on Sing The Sorrow (Should not exist)', 'color: #FF0000', findByTrackAndTitle('Big Shot', 'Sing The Sorrow'));
 
 // Function to search by Artist, Title AND Year
 function findByATY(artist, title, year, array) {
@@ -580,7 +600,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 12*
 1*
 234
-24
+24*
 23*
 2*
 34
