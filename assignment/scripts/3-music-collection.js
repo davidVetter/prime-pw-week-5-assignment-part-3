@@ -154,7 +154,7 @@ function findByTitle(title, array) {
     } // end if
   } // end for loop
   return results; // returns the new array of results or an empty array
-}
+} // end findByTitle function
 //console.log('Calling find by Title ', findByTitle('Swan Songs', collection)); // Test findByTitle function
 
 // Function that searches by year
@@ -183,7 +183,7 @@ function findByTrack(track, array) {
     //let trackArr = (Object.values(array.tracks));
     for (let target of arr) {
         let trackArr = (Object.values(target.tracks));
-        for (var i=0; i < trackArr.length; i++) {
+        for (let i = 0; i < trackArr.length; i++) {
             if (trackArr[i].trackName === track) {
                 results.push(target);
             }
@@ -324,9 +324,10 @@ function search(object, array) {
   let hasArt = target.hasOwnProperty("artist"); // Checks if passed object has property artist
   let hasTitle = target.hasOwnProperty("title"); // Checks if passed object has property title
   let hasYear = target.hasOwnProperty("year"); // Checks if passed object has property year
+  let hasTrack = target.hasOwnProperty("tracks"); // Check if passed object has property tracks
   //console.log(`hasTitle is ${hasTitle} and hasArt is ${hasArt} and hasYear is ${hasYear}`); // Test log to track property checks worked correctly
 
-  if (hasArt === false && hasTitle === false && hasYear === false) {
+  if (hasArt === false && hasTitle === false && hasYear === false && hasTrack === false) {
     // if empty object passed
     console.warn("No search parameters given - Displaying all"); // log message that collection was selected
     return arr; // return full collection
@@ -360,7 +361,10 @@ function search(object, array) {
       `Search Parameters: ${target.artist}, ${target.title} and ${target.year}`
     ); // Log search parameters used
     return findByATY(target.artist, target.title, target.year, arr); // Return results of findByATY function
-  } // end else/ifs
+  } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
+    console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #ef2d56');
+    return findByTrack(target.tracks, arr);
+  }
 } // end search Function
 
 // Search Function test logs
@@ -401,6 +405,7 @@ console.log(
     collection
   )
 );
+console.log('Search Results: ', search({tracks: 'Listening'}));
 
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
