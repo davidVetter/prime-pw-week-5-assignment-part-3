@@ -358,31 +358,31 @@ function search(object, array) {
     // if empty object passed
     console.warn("No search parameters given - Displaying all"); // log message that collection was selected
     return arr; // return full collection
-  } else if (hasArt && hasTitle === false && hasYear === false) {
+  } else if (hasArt && hasTitle === false && hasYear === false && hasTrack === false) {
     // if artist used to search
     console.log(`%cSearch Parameters: ${target.artist}`, 'color: #ef2d56'); // Log search parameters used
     return findByArtist(target.artist, arr); // Return results of function findByArtist
-  } else if (hasArt === false && hasTitle && hasYear === false) {
+  } else if (hasArt === false && hasTitle && hasYear === false && hasTrack === false) {
     // if title used to search
     console.log(`Search Parameters: ${target.title}`); // Log search parameters used
     return findByTitle(target.title, arr); // Return results of findByTitle function
-  } else if (hasArt === false && hasTitle === false && hasYear) {
+  } else if (hasArt === false && hasTitle === false && hasYear && hasTrack === false) {
     // if year used to search
     console.log(`Search Parameters: ${target.year}`); // Log search parameters used
     return findByYear(target.year, arr); // Return results of findByYear function
-  } else if (hasArt && hasTitle && hasYear === false) {
+  } else if (hasArt && hasTitle && hasYear === false && hasTrack === false) {
     // if artist and title used to search
     console.log(`Search Parameters: ${target.artist} and ${target.title}`); // Log search parameters
     return findByAandT(target.artist, target.title, arr); // return results of findByAandT
-  } else if (hasArt && hasTitle === false && hasYear) {
+  } else if (hasArt && hasTitle === false && hasYear && hasTrack === false) {
     // if artist and year used to search
     console.log(`Search Parameters: ${target.artist} and ${target.year}`); // log search parameters
     return findByAandY(target.artist, target.year, arr); // returns results of findByAandY
-  } else if (hasArt === false && hasTitle && hasYear) {
+  } else if (hasArt === false && hasTitle && hasYear && hasTrack === false) {
     // if title and year used to search
     console.log(`Search Parameters: ${target.title} and ${target.year}`); // Log search parameters used
     return findByTandY(target.title, target.year, arr); // return results of function findByTandY
-  } else if (hasArt && hasTitle && hasYear) {
+  } else if (hasArt && hasTitle && hasYear && hasTrack === false) {
     // if artist, title and year used to search
     console.log(
       `Search Parameters: ${target.artist}, ${target.title} and ${target.year}`
@@ -391,6 +391,9 @@ function search(object, array) {
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
     console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #ef2d56');
     return findByTrack(target.tracks, arr);
+  } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) {
+    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist}`, 'color: #ef2d56');
+    return findByTrackAndArt(target.tracks, target.artist, arr);
   }
 } // end search Function
 
@@ -432,7 +435,9 @@ console.log(
     collection
   )
 );
-console.log('Search Results: ', search({tracks: 'Listening'}));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening'}));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening', artist: 'The Used'}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening', artist: 'AFI'}, collection));
 
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
@@ -545,7 +550,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 134
 124
 123*
-14
+14*
 13*
 12*
 1*
