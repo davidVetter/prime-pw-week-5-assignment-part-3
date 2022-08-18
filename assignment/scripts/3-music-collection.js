@@ -409,11 +409,14 @@ function search(object, array) {
     ); // Log search parameters used
     return findByATY(target.artist, target.title, target.year, arr); // Return results of findByATY function
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
-    console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #ef2d56');
+    console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #0096ff');
     return findByTrack(target.tracks, arr);
   } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) {
-    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist}`, 'color: #ef2d56');
+    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist}`, 'color: #0096ff');
     return findByTrackAndArt(target.tracks, target.artist, arr);
+  }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) {
+    console.log(`%cSearch Parameters: ${target.tracks} on ${target.title}`, 'color: #0096ff');
+    return findByTrackAndTitle(target.tracks, target.title, arr);
   }
 } // end search Function
 
@@ -457,7 +460,9 @@ console.log(
 );
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening'}));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening', artist: 'The Used'}, collection));
-console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening', artist: 'AFI'}, collection));
+console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Listening', artist: 'AFI'}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', title: "Ropin' The Wind"}, collection));
+console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Rodeo', title: "Glass Houses"}, collection));
 
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
