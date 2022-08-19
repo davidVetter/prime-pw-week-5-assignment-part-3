@@ -775,3 +775,35 @@ function removeTrack(track, artist, title, year, array) {
   console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
   console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+
+  // Remove Album Function
+  // Function to search by Artist, Title AND Year
+function removeTitle(artist, title, year, array) {
+    let findArtist = artist.toLowerCase(); // variable for artist argument
+    let findTitle = title.toLowerCase(); // variable for title argument
+    let findYear = Number(year); // variable for year argument
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = []; // empty array for search results
+    let c = 0;
+    let removedTitle = [];
+    for (let target of arr) {
+      // for loop that searchs through given array of objects
+      if ((target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle && target.year === findYear)) {
+        // match if artist, title and year property matches artist given
+        removedTitle = arr.splice(c, 1);
+      } // end if
+      c++;
+    } // end for loop
+    if (removedTitle.length > 0) {
+        return `${removedTitle[0].title} from ${removedTitle[0].year} by ${removedTitle[0].artist} was successfully removed from the collection!`; // returns the new array of results or an empty array
+    } else {
+        return 'NO MATCHES FOUND! NO ALBUM REMOVED.';
+    }
+  } // end findByYear Function
+
+  console.log('%c******** START REMOVE ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
+  console.log('%cRemoving album Swan Songs (should be removed)', 'color: #ff6600', removeTitle('Hollywood Undead', 'Swan Songs', 2008));
+  showCollection(collection);
+  console.log('%cTesting remove album function ', 'color: #ff0000', removeTitle('Bollywood Undead', 'Swan Songs', 2008));
+  showCollection(collection);
+  console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
