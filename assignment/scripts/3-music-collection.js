@@ -730,3 +730,35 @@ console.log('%cLogging the sorted collection by YEAR', 'color: #66ff00', sortYea
 console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortArtist(collection));
 console.log('%cLogging the sorted collection by TITLE', 'color: #66ff00', sortTitle(collection));
 console.log('%cShowing collection itself is still unsorted', 'color: #66ff00', collection);
+
+// Function that removes a track from a matching album
+function removeTrack(track, artist, title, year, array) {
+    let findTrack = track.toLowerCase();
+    let findArtist = artist.toLowerCase();
+    let findTitle = title.toLowerCase();
+    let addYear = Number(year);
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = [];
+    for (let target of arr) {
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+            for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                if (trackArr[i].trackName.toLowerCase() === findTrack && target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle && target.year === addYear) { // check if trackName for current element of track array is equal to request track, artist, title and year matches
+                    results = trackArr.splice(i, 1); // sets returns equal to the song removed
+                    target.tracks = trackArr; // sets track array to new array with track removed
+                }
+            }
+        }
+    }
+    if (results.length < 1) {
+        return 'NO MATCHES! NO TRACKS REMOVED.';
+    } else {
+    return results; // returns the track that was removed
+    }
+  } // end removeTrack Function
+
+  // Test logs for removeTrack function
+  console.log('%cRemoving Bleed Black by AFI on Sing The Sorrow from 2003 ', 'color: #66ff00', removeTrack('Bleed Black', 'AFI', 'Sing The Sorrow', 2003, collection));
+  showCollection(collection);
+  console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
+  showCollection(collection);
