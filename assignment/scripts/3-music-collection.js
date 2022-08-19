@@ -68,7 +68,7 @@ console.log(
     { trackName: "Black Dahlia", time: "3:45" },
   ])
 );
-console.log("Collection after adding ", collection);
+console.log("%cCollection after adding ", 'color: #66ff00', collection);
 //console.log("The 3rd albums in my collection is ", collection[2]);
 
 // Function that accepts an array and displays the number of objects
@@ -154,7 +154,8 @@ function findByTitle(title, array) {
   } // end for loop
   return results; // returns the new array of results or an empty array
 } // end findByTitle function
-console.log('Calling find by Title (mixed) ', findByTitle('swAN SoNgs', collection)); // Test findByTitle function
+
+//console.log('Calling find by Title (mixed) ', findByTitle('swAN SoNgs', collection)); // Test findByTitle function
 
 // Function that searches by year
 function findByYear(year, array) {
@@ -171,7 +172,7 @@ function findByYear(year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-console.log('Calling find by Year ', findByYear('2003', collection)); // Test findByYear function
+//console.log('Calling find by Year ', findByYear('2003', collection)); // Test findByYear function
 
 // Function that searches by Track
 function findByTrack(track, array) {
@@ -193,9 +194,9 @@ function findByTrack(track, array) {
 } // end findByYear Function
 
 console.log('%cCalling findByTrack function for Bleed Black(should not exist yet)', 'color: #FF0000', findByTrack('Bleed Black'));
-console.log('%cCalling findByTrack function for Listening (mixed)', 'color: #66ff00', findByTrack('LisTEning'));
-console.log('%cCalling findByTrack function for Rodeo', 'color: #66ff00', findByTrack('RodEo'));
-console.log('%cCalling findByTrack function for Big Shot', 'color: #66ff00', findByTrack('BIG SHOT'));
+console.log('%cCalling findByTrack function for LisTEning (mixed)', 'color: #66ff00', findByTrack('LisTEning'));
+console.log('%cCalling findByTrack function for RodEo', 'color: #66ff00', findByTrack('RodEo'));
+console.log('%cCalling findByTrack function for BIG SHOT', 'color: #66ff00', findByTrack('BIG SHOT'));
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -213,7 +214,7 @@ function findByAandT(artist, title, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-console.log('Calling the findByAandT function (mixed) ', findByAandT('BiLLy Joel', 'Glass HoUSes', collection)); // Test findByAandT Function
+//console.log('Calling the findByAandT function (mixed) ', findByAandT('BiLLy Joel', 'Glass HoUSes', collection)); // Test findByAandT Function
 
 // Function to search by artist AND year
 function findByAandY(artist, year, array) {
@@ -231,7 +232,7 @@ function findByAandY(artist, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-console.log('Calling the findByAandY function (mixed)', findByAandY('Afi', '2003', collection)); // Test findByAandY function
+//console.log('Calling the findByAandY function (mixed)', findByAandY('Afi', '2003', collection)); // Test findByAandY function
 
 // Function that searches by Track AND Artist
 function findByTrackAndArt(track, artist, array) {
@@ -252,7 +253,7 @@ function findByTrackAndArt(track, artist, array) {
     return results; // returns the new array of results or an empty array
   } // end findByYear Function
 
-  console.log('%cCalling findByTrackAndArt function for BIG shOT by bILLY JoEl (mixed)', 'color: #66ff00', findByTrackAndArt('BIG shOT', 'bILLY JoEl'));
+  //console.log('%cCalling findByTrackAndArt function for BIG shOT by bILLY JoEl (mixed)', 'color: #66ff00', findByTrackAndArt('BIG shOT', 'bILLY JoEl'));
 
   // Function that searches by Track AND Artist AND Title
 function findByTrackArtTitle(track, artist, title, array) {
@@ -274,7 +275,7 @@ function findByTrackArtTitle(track, artist, title, array) {
     return results; // returns the new array of results or an empty array
   } // end findByYear Function
 
-  console.log('%cCalling findByTrackArtTitle function for You May Be Right by BillY Joel on GlaSS Houses (mixed)', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'BillY Joel', 'GlaSS Houses'));
+  //console.log('%cCalling findByTrackArtTitle function for You May Be Right by BillY Joel on GlaSS Houses (mixed)', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'BillY Joel', 'GlaSS Houses'));
 
     // Function that searches by Track AND Artist AND year
     function findByTrackArtistYear(track, artist, year, array) {
@@ -295,7 +296,7 @@ function findByTrackArtTitle(track, artist, title, array) {
         return results; // returns the new array of results or an empty array
       } // end findByYear Function
     
-      console.log('%cCalling findByTrackArtistYear function for You May Be RiGHt by BillY Joel from 1980', 'color: #66ff00', findByTrackArtistYear('You May Be RiGHt', 'BillY Joel', '1980'));  
+    //console.log('%cCalling findByTrackArtistYear function for You May Be RiGHt by BillY Joel from 1980', 'color: #66ff00', findByTrackArtistYear('You May Be RiGHt', 'BillY Joel', '1980'));  
 
     // Function that searches by Track AND Title AND year
 function findByTrackTitleYear(track, title, year, array) {
@@ -316,7 +317,7 @@ function findByTrackTitleYear(track, title, year, array) {
     return results; // returns the new array of results or an empty array
   } // end findByYear Function
 
-  console.log('%cCalling findByTrackTitleYear function for You MAY Be Right on GlAss Houses from 1980', 'color: #66ff00', findByTrackTitleYear('You MAY Be Right', 'GlAss Houses', '1980'));
+  //console.log('%cCalling findByTrackTitleYear function for You MAY Be Right on GlAss Houses from 1980', 'color: #66ff00', findByTrackTitleYear('You MAY Be Right', 'GlAss Houses', '1980'));
 
 // Function to search by title AND year
 function findByTandY(title, year, array) {
@@ -334,7 +335,7 @@ function findByTandY(title, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-console.log('Calling the findByTandY function (mixed)', findByTandY('In Love AND DeAth', '2003', collection)); // Test the findByTandY function
+//console.log('Calling the findByTandY function (mixed)', findByTandY('In Love AND DeAth', '2003', collection)); // Test the findByTandY function
 
 // Function that searches by Track AND Year
 function findByTrackAndYear(track, year, array) {
@@ -355,8 +356,8 @@ function findByTrackAndYear(track, year, array) {
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
-  console.log('%cCalling findByTrackAndYear function for Big Shot in 1978', 'color: #66ff00', findByTrackAndYear('bIg sHot', '1978'));
-  console.log('%cCalling findByTrackAndYear function for Big Shot in 1980 (Should not exist)', 'color: #FF0000', findByTrackAndYear('Big Shot', 1980));
+  //console.log('%cCalling findByTrackAndYear function for Big Shot in 1978', 'color: #66ff00', findByTrackAndYear('bIg sHot', '1978'));
+  //console.log('%cCalling findByTrackAndYear function for Big Shot in 1980 (Should not exist)', 'color: #FF0000', findByTrackAndYear('Big Shot', 1980));
 
   // Function that searches by Track AND Title
 function findByTrackAndTitle(track, title, array) {
@@ -377,8 +378,8 @@ function findByTrackAndTitle(track, title, array) {
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
-  console.log('%cCalling findByTrackAndTitle function for Big ShoT on 52nd StReet', 'color: #66ff00', findByTrackAndTitle('Big ShoT', '52nd StReet'));
-  console.log('%cCalling findByTrackAndTitle function for Big Shot on Sing The Sorrow (Should not exist)', 'color: #FF0000', findByTrackAndTitle('Big Shot', 'Sing The Sorrow'));
+  //console.log('%cCalling findByTrackAndTitle function for Big ShoT on 52nd StReet', 'color: #66ff00', findByTrackAndTitle('Big ShoT', '52nd StReet'));
+  //console.log('%cCalling findByTrackAndTitle function for Big Shot on Sing The Sorrow (Should not exist)', 'color: #FF0000', findByTrackAndTitle('Big Shot', 'Sing The Sorrow'));
 
 // Function to search by Artist, Title AND Year
 function findByATY(artist, title, year, array) {
@@ -397,7 +398,7 @@ function findByATY(artist, title, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-console.log('Calling the findByATY function (mixed)', findByATY('AFi', 'Sing The SorROw', '2003', collection)); // Testing findByATY function
+//console.log('Calling the findByATY function (mixed)', findByATY('AFi', 'Sing The SorROw', '2003', collection)); // Testing findByATY function
 
 // Function that searches by Track AND artist AND title AND Year
 function findByTrackArtistTitleYear(track, artist, title, year, array) {
@@ -420,8 +421,8 @@ function findByTrackArtistTitleYear(track, artist, title, year, array) {
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
-  console.log('%cCalling findByTrackArtistTitleYear function for Big ShOt by Billy Joel on 52nd StrEEt in 1978', 'color: #66ff00', findByTrackArtistTitleYear('Big ShOt', 'Billy Joel', '52nd StrEEt', '1978'));
-  console.log('%cCalling findByTrackArtistTitleYear function for Big Shot By Garth Brooks on 52nd Street in 1980 (Should not exist)', 'color: #FF0000', findByTrackArtistTitleYear('Big Shot', 'Garth Brooks', '52nd Street', 1980));
+  //console.log('%cCalling findByTrackArtistTitleYear function for Big ShOt by Billy Joel on 52nd StrEEt in 1978', 'color: #66ff00', findByTrackArtistTitleYear('Big ShOt', 'Billy Joel', '52nd StrEEt', '1978'));
+  //console.log('%cCalling findByTrackArtistTitleYear function for Big Shot By Garth Brooks on 52nd Street in 1980 (Should not exist)', 'color: #FF0000', findByTrackArtistTitleYear('Big Shot', 'Garth Brooks', '52nd Street', 1980));
 
 // This function checks if the passed array is empty and assigns a default value if it was
 // Returns original array passed if it isn't empty
@@ -429,7 +430,7 @@ function collectionCheck(array) {
   let arr = array; // variable for argument
   if (arr === undefined || arr === "") {
     // Check if an array to search was passed or uses "collection"
-    console.warn(`No collection selected - Using default`); // message acknowleding no array passed
+    console.log(`%cNo collection selected - Using default`, 'color: #ffea00'); // message acknowleding no array passed
     return arrDefault; // returns "default" value
   } else {
     return arr; // returns original array passed if array not empty
@@ -437,7 +438,7 @@ function collectionCheck(array) {
 }
 
 // Function that accepts an object properties as argument and an array.
-// Searches for object in array based on properties given
+// Searches for object in array based on properties given - Search object may have properties in any order
 function search(object, array) {
   let target = object;
   let arr = collectionCheck(array);
@@ -461,33 +462,31 @@ function search(object, array) {
     return arr; // return full collection
   } else if (hasArt && hasTitle === false && hasYear === false && hasTrack === false) {
     // if artist used to search
-    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}`, 'color: #ef2d56'); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}`, 'color: #0096ff'); // Log search parameters used
     return findByArtist(target.artist, arr); // Return results of function findByArtist
   } else if (hasArt === false && hasTitle && hasYear === false && hasTrack === false) {
     // if title used to search
-    console.log(`Search Parameters: ${target.title.toUpperCase()}`); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.title.toUpperCase()}`, 'color: #0096ff'); // Log search parameters used
     return findByTitle(target.title, arr); // Return results of findByTitle function
   } else if (hasArt === false && hasTitle === false && hasYear && hasTrack === false) {
     // if year used to search
-    console.log(`Search Parameters: ${target.year}`); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByYear(Number(target.year), arr); // Return results of findByYear function
   } else if (hasArt && hasTitle && hasYear === false && hasTrack === false) {
     // if artist and title used to search
-    console.log(`Search Parameters: ${target.artist.toUpperCase()} and ${target.title.toUpperCase()}`); // Log search parameters
+    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()} and ${target.title.toUpperCase()}`, 'color: #0096ff'); // Log search parameters
     return findByAandT(target.artist, target.title, arr); // return results of findByAandT
   } else if (hasArt && hasTitle === false && hasYear && hasTrack === false) {
     // if artist and year used to search
-    console.log(`Search Parameters: ${target.artist.toUpperCase()} and ${target.year}`); // log search parameters
+    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // log search parameters
     return findByAandY(target.artist, Number(target.year), arr); // returns results of findByAandY
   } else if (hasArt === false && hasTitle && hasYear && hasTrack === false) {
     // if title and year used to search
-    console.log(`Search Parameters: ${target.title.toUpperCase()} and ${target.year}`); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.title.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByTandY(target.title, Number(target.year), arr); // return results of function findByTandY
   } else if (hasArt && hasTitle && hasYear && hasTrack === false) {
     // if artist, title and year used to search
-    console.log(
-      `Search Parameters: ${target.artist.toUpperCase()}, ${target.title.toUpperCase()} and ${target.year}`
-    ); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}, ${target.title.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByATY(target.artist, target.title, Number(target.year), arr); // Return results of findByATY function
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()}`, 'color: #0096ff');
@@ -517,43 +516,24 @@ function search(object, array) {
 } // end search Function
 
 // Search Function test logs
-console.log("Search Results: ", search({ artist: "Ray Charles", year: 1957 }));
-console.log(
-  "Search Results: ",
-  search({ artist: "Billy Joel", title: "52nd Street", year: 1978 }, collection)
-);
-console.log(
-  "Search Results: ",
-  search({ artist: "GarTh BrOOks", title: "Ropin' The Wind" }, collection)
-);
-console.log(
-  "Search Results: ",
-  search({ artist: "HOllYWOOD UNDEAD", year: 2008 }, collection)
-);
-console.log("Search Results: ", search({ title: "glass hOUses", year: '1980' }));
-console.log("Search Results: ", search({ artist: "Billy Joel" }, collection));
-console.log("Search Results: ", search({ title: "52nD StREet" }, collection));
-console.log("Search Results: ", search({ year: 2003 }, collection));
-console.log("Search Results: ", search({}, collection));
-console.log("Search Results: ", search({}));
-console.log("Search Results: ", search());
-console.log("Search Results: ", search("", ""));
-console.log(
-  "Search Resutls: ",
-  search({ title: "sing the sorrow" }, collection)
-);
-console.log("Search Results: ", search({ artist: "billy joel" }, collection));
-console.log(
-  "Search Results: ",
-  search({ artist: "THE USED", title: "IN LOVE AND DEATH" }, collection)
-);
-console.log(
-  "Search Results: ",
-  search(
-    { artist: "the uSEd", title: "in love and death", year: 2003 },
-    collection
-  )
-);
+// Output displays search PARAMETERS in BLUE, tests that SHOULD have results in GREEN, and tests that should NOT in RED
+console.log('%c******** START SEARCH FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
+console.log("%cSearch Results: ", 'color: #ff0000', search({ artist: "Ray Charles", year: 1957 }));
+console.log("%cSearch Results: ", 'color: #66ff00', search({ artist: "Billy Joel", title: "52nd Street", year: 1978 }, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({ artist: "GarTh BrOOks", title: "Ropin' The Wind" }, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({ artist: "HOllYWOOD UNDEAD", year: 2008 }, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({title: "glass hOUses", year: '1980'}));
+console.log("%cSearch Results: ", 'color: #66ff00', search({artist: "Billy Joel"}, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({title: "52nD StREet"}, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({year: 2003}, collection));
+console.log("%cSearch Results: ", 'color: #ff7518', search({}, collection));
+console.log("%cSearch Results: ", 'color: #ff7518', search({}));
+console.log("%cSearch Results: ", 'color: #ff7518', search());
+console.log("%cSearch Results: ", 'color: #ff7518', search("", ""));
+console.log("%cSearch Resutls: ", 'color: #66ff00', search({title: "sing the sorrow"}, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({artist: "billy joel"}, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({artist: "THE USED", title: "IN LOVE AND DEATH"}, collection));
+console.log("%cSearch Results: ", 'color: #66ff00', search({artist: "the uSEd", title: "in love and death", year: 2003},collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'LisTENing'}));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'ListEning', artist: 'The USEd'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Listening', artist: 'AFI'}, collection));
@@ -570,6 +550,7 @@ console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Unfed', art
 console.log('%cSearch Results: ', 'color: #66ff00', search({artist: 'Hollywood Undead', tracks: 'Undead', year: '2008'}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({artist: 'Garth BRooks', tracks: 'In LonESOme Dove', title: "Ropin' The Wind", year: '1991'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({artist: 'The Used', tracks: 'In Lonesome Dove', title: "Ropin' The Wind", year: '2005'}, collection));
+console.log(('%c****** END SEARCH FUNCTION TEST DATA ******'), 'background: #dfff00; color: #0096ff');
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
 // It will then search the collection for matching artist, title and year then add the tracks
@@ -668,8 +649,8 @@ console.log(
       collection
     )
   );
-console.warn(
-  "Trying to add tracks with bad info ",
+console.log(
+  "%cTrying to add tracks with bad info ", 'color: #ff0000',
   addTrack(
     [
       { trackName: "Big Shot", time: "4:18" },
@@ -681,13 +662,13 @@ console.warn(
     collection
   )
 );
-console.log("Showing tracks in AFI - Sing The Sorrow ", collection[4].tracks);
+console.log("%cShowing tracks in AFI - Sing The Sorrow (should be 4)", 'color: #66ff00', collection[4].tracks);
 console.log(
-  "Checking if tracks were added to Billy Joel - 52nd Street (Should only have 2)",
+  "%cChecking if tracks were added to Billy Joel - 52nd Street (Should only have 2)", 'color: #66ff00',
   collection[0].tracks
 );
 console.log(
-  "Trying to add duplicate tracks to Billy Joel - 52nd Street",
+  "%cTrying to add duplicate tracks to Billy Joel - 52nd Street", 'color: #ff0000',
   addTrack(
     [
       { trackName: "Big Shot", time: "4:03" },
@@ -699,7 +680,7 @@ console.log(
     collection
   )
 );
-console.log("Tracks for Billy Joel - 52nd Street", collection[0].tracks);
+console.log("%cTracks for Billy Joel - 52nd Street", 'color: #66ff00', collection[0].tracks);
 showCollection(collection);
 //console.log(findByArtist("Billy Joel"));
 //console.log(findByTitle("52nd Street"));
@@ -745,31 +726,7 @@ return sortTitleCollection; // return sorted collection
 } // end sortTitle function
 
 //Logs to test sort functions
-console.log('Logging the sorted collection by YEAR', sortYear(collection));
-console.log('Logging the sorted collection by ARTIST', sortArtist(collection));
-console.log('Logging the sorted collection by TITLE', sortTitle(collection));
-console.log('Showing collection itself is still unsorted', collection);
-
-// ********* CREATE A SINGLE TRACK ADD FUNCTION ************ //
-/* Make it accept song name as string, time as string, artist name, album title, year published and colleciton
-Can I use find or index array methods to check for matching album?? See week 3 or other previous assignments on array
-*/
-
-//Asterisk means done, non means need to add if/else
-
-/*1234*
-134*
-124*
-123*
-14*
-13*
-12*
-1*
-234*
-24*
-23*
-2*
-34*
-3*
-4*
-0*/
+console.log('%cLogging the sorted collection by YEAR', 'color: #66ff00', sortYear(collection));
+console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortArtist(collection));
+console.log('%cLogging the sorted collection by TITLE', 'color: #66ff00', sortTitle(collection));
+console.log('%cShowing collection itself is still unsorted', 'color: #66ff00', collection);
