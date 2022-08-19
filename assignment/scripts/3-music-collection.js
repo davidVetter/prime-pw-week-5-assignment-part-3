@@ -105,16 +105,12 @@ showCollection(collection); // call showCollection function with collection arra
 // Function that searchs the given array by artist and returns a
 // new array with any matching
 function findByArtist(artist, array) {
-  let findArtist = artist; // variable for artist argument
+  let findArtist = artist.toLowerCase(); // variable for artist argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
     // for loop that searchs through given array of objects
-    if (
-      target.artist === findArtist ||
-      target.artist.toUpperCase() === findArtist ||
-      target.artist.toLowerCase() === findArtist
-    ) {
+    if (target.artist.toLowerCase() === findArtist) {
       // match if artist property matches artist given
       results.push(target); // add object if the artist match
     } // end if
@@ -124,45 +120,41 @@ function findByArtist(artist, array) {
 
 // Test data for findByArtist search function
 console.log(
-  "%cLets see if AFI is here (should return a result)", 'background: #9fd356; color: #342e37',
-  findByArtist("AFI", collection)
+  "%cLets see if AFI is here (should return a result(mixed))", 'color: #66ff00',
+  findByArtist("AfI", collection)
 );
 console.log(
-  "%cLets see if Billy Joel is here (should return a result)", 'background: #9fd356; color: #342e37',
-  findByArtist("Billy Joel")
+  "%cLets see if Billy Joel is here (should return a result)", 'color: #66ff00',
+  findByArtist("BiLly JOEl")
 );
-console.error(
-  "Lets see if Elton John is here (should return no result)",
+console.log(
+  "%cLets see if Elton John is here (should return no result)", 'color: #ff0000',
   findByArtist("Elton John")
 );
 console.log(
-  "%cLets see if The Used is here (should return a result)", 'background: #9fd356; color: #342e37',
+  "%cLets see if The Used is here (should return a result)", 'color: #66ff00',
   findByArtist("The Used", collection)
 );
-console.error(
-  "Lets see if Asking Alexandria is here (should return no result)",
+console.log(
+  "%cLets see if Asking Alexandria is here (should return no result)", 'color: #ff0000',
   findByArtist("Asking Alexandria", collection)
 );
 
 // Function that searches by title
 function findByTitle(title, array) {
-  let findTitle = title; // variable for title argument
+  let findTitle = title.toLowerCase(); // variable for title argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
     // for loop that searchs through given array of objects
-    if (
-      target.title === findTitle ||
-      target.title.toUpperCase() === findTitle ||
-      target.title.toLowerCase() === findTitle
-    ) {
+    if (target.title.toLowerCase()=== findTitle) {
       // match if title property matches artist given
       results.push(target); // add object if the title match
     } // end if
   } // end for loop
   return results; // returns the new array of results or an empty array
 } // end findByTitle function
-//console.log('Calling find by Title ', findByTitle('Swan Songs', collection)); // Test findByTitle function
+console.log('Calling find by Title (mixed) ', findByTitle('swAN SoNgs', collection)); // Test findByTitle function
 
 // Function that searches by year
 function findByYear(year, array) {
@@ -183,7 +175,7 @@ console.log('Calling find by Year ', findByYear('2003', collection)); // Test fi
 
 // Function that searches by Track
 function findByTrack(track, array) {
-    //let findTrack = track; // variable for year argument
+    let findTrack = track.toLowerCase(); // variable for year argument
     let arr = collectionCheck(array); // variable for the array argument
     let results = [];
     //let trackArr = (Object.values(array.tracks));
@@ -191,7 +183,7 @@ function findByTrack(track, array) {
         if (target.hasOwnProperty('tracks')) {
             let trackArr = (Object.values(target.tracks));
             for (let i = 0; i < trackArr.length; i++) {
-                if (trackArr[i].trackName === track) {
+                if (trackArr[i].trackName.toLowerCase() === findTrack) {
                     results.push(target);
                 }
             }    
@@ -201,9 +193,9 @@ function findByTrack(track, array) {
 } // end findByYear Function
 
 console.log('%cCalling findByTrack function for Bleed Black(should not exist yet)', 'color: #FF0000', findByTrack('Bleed Black'));
-console.log('%cCalling findByTrack function for Listening', 'color: #66ff00', findByTrack('Listening'));
-console.log('%cCalling findByTrack function for Rodeo', 'color: #66ff00', findByTrack('Rodeo'));
-console.log('%cCalling findByTrack function for Big Shot', 'color: #66ff00', findByTrack('Big Shot'));
+console.log('%cCalling findByTrack function for Listening (mixed)', 'color: #66ff00', findByTrack('LisTEning'));
+console.log('%cCalling findByTrack function for Rodeo', 'color: #66ff00', findByTrack('RodEo'));
+console.log('%cCalling findByTrack function for Big Shot', 'color: #66ff00', findByTrack('BIG SHOT'));
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -481,11 +473,11 @@ function search(object, array) {
     return arr; // return full collection
   } else if (hasArt && hasTitle === false && hasYear === false && hasTrack === false) {
     // if artist used to search
-    console.log(`%cSearch Parameters: ${target.artist}`, 'color: #ef2d56'); // Log search parameters used
+    console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}`, 'color: #ef2d56'); // Log search parameters used
     return findByArtist(target.artist, arr); // Return results of function findByArtist
   } else if (hasArt === false && hasTitle && hasYear === false && hasTrack === false) {
     // if title used to search
-    console.log(`Search Parameters: ${target.title}`); // Log search parameters used
+    console.log(`Search Parameters: ${target.title.toUpperCase()}`); // Log search parameters used
     return findByTitle(target.title, arr); // Return results of findByTitle function
   } else if (hasArt === false && hasTitle === false && hasYear && hasTrack === false) {
     // if year used to search
@@ -493,45 +485,45 @@ function search(object, array) {
     return findByYear(Number(target.year), arr); // Return results of findByYear function
   } else if (hasArt && hasTitle && hasYear === false && hasTrack === false) {
     // if artist and title used to search
-    console.log(`Search Parameters: ${target.artist} and ${target.title}`); // Log search parameters
+    console.log(`Search Parameters: ${target.artist.toUpperCase()} and ${target.title.toUpperCase()}`); // Log search parameters
     return findByAandT(target.artist, target.title, arr); // return results of findByAandT
   } else if (hasArt && hasTitle === false && hasYear && hasTrack === false) {
     // if artist and year used to search
-    console.log(`Search Parameters: ${target.artist} and ${target.year}`); // log search parameters
+    console.log(`Search Parameters: ${target.artist.toUpperCase()} and ${target.year}`); // log search parameters
     return findByAandY(target.artist, Number(target.year), arr); // returns results of findByAandY
   } else if (hasArt === false && hasTitle && hasYear && hasTrack === false) {
     // if title and year used to search
-    console.log(`Search Parameters: ${target.title} and ${target.year}`); // Log search parameters used
+    console.log(`Search Parameters: ${target.title.toUpperCase()} and ${target.year}`); // Log search parameters used
     return findByTandY(target.title, Number(target.year), arr); // return results of function findByTandY
   } else if (hasArt && hasTitle && hasYear && hasTrack === false) {
     // if artist, title and year used to search
     console.log(
-      `Search Parameters: ${target.artist}, ${target.title} and ${target.year}`
+      `Search Parameters: ${target.artist.toUpperCase()}, ${target.title.toUpperCase()} and ${target.year}`
     ); // Log search parameters used
     return findByATY(target.artist, target.title, Number(target.year), arr); // Return results of findByATY function
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
-    console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()}`, 'color: #0096ff');
     return findByTrack(target.tracks, arr); // return results of findByTrack function
   } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) { // if track and artist were used to search
-    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()}`, 'color: #0096ff');
     return findByTrackAndArt(target.tracks, target.artist, arr); // return findByTrackAnd Art function
   }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) { // if track and title were used to search
-    console.log(`%cSearch Parameters: ${target.tracks} on ${target.title}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} on ${target.title.toUpperCase()}`, 'color: #0096ff');
     return findByTrackAndTitle(target.tracks, target.title, arr); // return results of findByTrackAndTitle function
   }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { // if track and year used to search
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackAndYear(target.tracks, Number(target.year), arr); // return findByTrackAndYear function results
   }   else if (hasTrack && hasArt && hasTitle && hasYear === false) { // if track, artist and title used to search
-    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} on ${target.title}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} on ${target.title.toUpperCase()}`, 'color: #0096ff');
     return findByTrackArtTitle(target.tracks, target.artist, target.title, arr); // return findByTrackAndYear function results
   }   else if (hasTrack && hasArt === false && hasTitle && hasYear) { // if track, artist and title used to search
-    console.log(`%cSearch Parameters: ${target.tracks} on ${target.title} from ${target.year}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} on ${target.title.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackTitleYear(target.tracks, target.title, Number(target.year), arr); // return findByTrackAndYear function results
   }   else if (hasTrack && hasArt && hasTitle === false && hasYear) { // if track, artist and title used to search
-    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} from ${target.year}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackArtistYear(target.tracks, target.artist, Number(target.year), arr); // return findByTrackAndYear function results
   }   else if (hasTrack && hasArt && hasTitle && hasYear) { // if track, artist and title used to search
-    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} on ${target.title} from ${target.year}`, 'color: #0096ff');
+    console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} on ${target.title.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackArtistTitleYear(target.tracks, target.artist, target.title, Number(target.year), arr); // return findByTrackAndYear function results
   }
 } // end search Function
@@ -552,7 +544,7 @@ console.log(
 );
 console.log("Search Results: ", search({ title: "glass houses", year: '1980' }));
 console.log("Search Results: ", search({ artist: "Billy Joel" }, collection));
-console.log("Search Results: ", search({ title: "52nd Street" }, collection));
+console.log("Search Results: ", search({ title: "52nD StREet" }, collection));
 console.log("Search Results: ", search({ year: 2003 }, collection));
 console.log("Search Results: ", search({}, collection));
 console.log("Search Results: ", search({}));
@@ -574,7 +566,7 @@ console.log(
     collection
   )
 );
-console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening'}));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'LisTENing'}));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening', artist: 'The Used'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Listening', artist: 'AFI'}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', title: "Ropin' The Wind"}, collection));
@@ -768,6 +760,7 @@ return sortTitleCollection; // return sorted collection
 console.log('Logging the sorted collection by YEAR', sortYear(collection));
 console.log('Logging the sorted collection by ARTIST', sortArtist(collection));
 console.log('Logging the sorted collection by TITLE', sortTitle(collection));
+console.log('Showing collection itself is still unsorted', collection);
 
 // ********* CREATE A SINGLE TRACK ADD FUNCTION ************ //
 /* Make it accept song name as string, time as string, artist name, album title, year published and colleciton
