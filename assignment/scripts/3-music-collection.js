@@ -272,6 +272,25 @@ function findByTrackAndArt(track, artist, array) {
 
   console.log('%cCalling findByTrackAndArt function for Bleed Black by AFI', 'color: #66ff00', findByTrackAndArt('Bleed Black', 'AFI'));
 
+  // Function that searches by Track AND Artist AND Title
+function findByTrackArtTitle(track, artist, title, array) {
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = [];
+    for (let target of arr) {
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+            for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                if (trackArr[i].trackName === track && target.artist === artist && target.title === title) { // check if trackName for current element of track array is equal to request track, artist and title matches
+                    results.push(target); // push object to results array
+                }
+            }
+        }
+    }
+    return results; // returns the new array of results or an empty array
+  } // end findByYear Function
+
+  console.log('%cCalling findByTrackAndArt function for You May Be Right by Billy Joel on Glass Houses ', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'Billy Joel', 'Glass Houses'));
+
 // Function to search by title AND year
 function findByTandY(title, year, array) {
   let findTitle = title; // variable for title argument
@@ -440,6 +459,9 @@ function search(object, array) {
   }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { // if track and year used to search
     console.log(`%cSearch Parameters: ${target.tracks} from ${target.year}`, 'color: #0096ff');
     return findByTrackAndYear(target.tracks, target.year, arr); // return findByTrackAndYear function results
+  } else if (hasTrack && hasArt && hasTitle && hasYear === false) { // if track, artist and title used to search
+    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} on ${target.title}`, 'color: #0096ff');
+    return findByTrackArtTitle(target.tracks, target.artist, target.title, arr); // return findByTrackAndYear function results
   }
 } // end search Function
 
@@ -488,6 +510,8 @@ console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', tit
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Rodeo', title: "Glass Houses"}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', year: 1991}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Rodeo', year: 2000}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Take It Away', artist: 'The Used', title: 'In Love and Death'}, collection));
+console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Take It Away', artist: 'Garth Brooks', title: 'In Love and Death'}, collection));
 
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
@@ -677,7 +701,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 
 /*1234
 134
-124
+124*
 123*
 14*
 13*
@@ -687,7 +711,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 24*
 23*
 2*
-34
+34*
 3*
 4*
 0*/
