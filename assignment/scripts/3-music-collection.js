@@ -291,6 +291,25 @@ function findByTrackArtTitle(track, artist, title, array) {
 
   console.log('%cCalling findByTrackArtTitle function for You May Be Right by Billy Joel on Glass Houses ', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'Billy Joel', 'Glass Houses'));
 
+    // Function that searches by Track AND Artist AND year
+    function findByTrackArtistYear(track, artist, year, array) {
+        let arr = collectionCheck(array); // variable for the array argument
+        let results = [];
+        for (let target of arr) {
+            if (target.hasOwnProperty('tracks')) {
+                let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+                for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                    if (trackArr[i].trackName === track && target.artist === artist && target.year === Number(year)) { // check if trackName for current element of track array is equal to request track, title and year matches
+                        results.push(target); // push object to results array
+                    }
+                }
+            }
+        }
+        return results; // returns the new array of results or an empty array
+      } // end findByYear Function
+    
+      console.log('%cCalling findByTrackArtistYear function for You May Be Right by Billy Joel from 1980', 'color: #66ff00', findByTrackArtistYear('You May Be Right', 'Billy Joel', '1980'));  
+
     // Function that searches by Track AND Title AND year
 function findByTrackTitleYear(track, title, year, array) {
     let arr = collectionCheck(array); // variable for the array argument
@@ -485,6 +504,9 @@ function search(object, array) {
   }   else if (hasTrack && hasArt === false && hasTitle && hasYear) { // if track, artist and title used to search
     console.log(`%cSearch Parameters: ${target.tracks} on ${target.title} from ${target.year}`, 'color: #0096ff');
     return findByTrackTitleYear(target.tracks, target.title, Number(target.year), arr); // return findByTrackAndYear function results
+  }   else if (hasTrack && hasArt && hasTitle === false && hasYear) { // if track, artist and title used to search
+    console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} from ${target.year}`, 'color: #0096ff');
+    return findByTrackArtistYear(target.tracks, target.artist, Number(target.year), arr); // return findByTrackAndYear function results
   }
 } // end search Function
 
@@ -537,7 +559,9 @@ console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Take It Awa
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Take It Away', artist: 'Garth Brooks', title: 'In Love and Death'}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Undead', title: 'Swan Songs', year: 2008}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Big Shot', title: 'Swan Songs', year: 2008}, collection));
-
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Undead', artist: 'Hollywood Undead', year: '2008'}, collection));
+console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Unfed', artist: 'Hollywood Undead', year: '2008'}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({artist: 'Hollywood Undead', tracks: 'Undead', year: '2008'}, collection));
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
 // It will then search the collection for matching artist, title and year then add the tracks
@@ -725,7 +749,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 //Asterisk means done, non means need to add if/else
 
 /*1234
-134
+134*
 124*
 123*
 14*
