@@ -166,7 +166,7 @@ function findByTitle(title, array) {
 
 // Function that searches by year
 function findByYear(year, array) {
-  let findYear = year; // variable for year argument
+  let findYear = Number(year); // variable for year argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
@@ -179,7 +179,7 @@ function findByYear(year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-//console.log('Calling find by Year ', findByYear(2003, collection)); // Test findByYear function
+console.log('Calling find by Year ', findByYear('2003', collection)); // Test findByYear function
 
 // Function that searches by Track
 function findByTrack(track, array) {
@@ -232,7 +232,7 @@ function findByAandT(artist, title, array) {
 // Function to search by artist AND year
 function findByAandY(artist, year, array) {
   let findArtist = artist; // variable for artist argument
-  let findYear = year; // variable for the year argument
+  let findYear = Number(year); // variable for the year argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
@@ -251,7 +251,7 @@ function findByAandY(artist, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-//console.log('Calling the findByAandY function ', findByAandY('AFI', 2003, collection)); // Test findByAandY function
+//console.log('Calling the findByAandY function ', findByAandY('AFI', '2003', collection)); // Test findByAandY function
 
 // Function that searches by Track AND Artist
 function findByTrackAndArt(track, artist, array) {
@@ -289,12 +289,31 @@ function findByTrackArtTitle(track, artist, title, array) {
     return results; // returns the new array of results or an empty array
   } // end findByYear Function
 
-  console.log('%cCalling findByTrackAndArt function for You May Be Right by Billy Joel on Glass Houses ', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'Billy Joel', 'Glass Houses'));
+  console.log('%cCalling findByTrackArtTitle function for You May Be Right by Billy Joel on Glass Houses ', 'color: #66ff00', findByTrackArtTitle('You May Be Right', 'Billy Joel', 'Glass Houses'));
+
+    // Function that searches by Track AND Title AND year
+function findByTrackTitleYear(track, title, year, array) {
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = [];
+    for (let target of arr) {
+        if (target.hasOwnProperty('tracks')) {
+            let trackArr = (Object.values(target.tracks)); // variable equal to the properties of tracks for current element in the collection used as an array of objects
+            for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
+                if (trackArr[i].trackName === track && target.title === title && target.year === Number(year)) { // check if trackName for current element of track array is equal to request track, title and year matches
+                    results.push(target); // push object to results array
+                }
+            }
+        }
+    }
+    return results; // returns the new array of results or an empty array
+  } // end findByYear Function
+
+  console.log('%cCalling findByTrackTitleYear function for You May Be Right on Glass Houses from 1980', 'color: #66ff00', findByTrackTitleYear('You May Be Right', 'Glass Houses', '1980'));
 
 // Function to search by title AND year
 function findByTandY(title, year, array) {
   let findTitle = title; // variable for title argument
-  let findYear = year; // variable for year argument
+  let findYear = Number(year); // variable for year argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
@@ -311,10 +330,11 @@ function findByTandY(title, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-//console.log('Calling the findByTandY function ', findByTandY('Maybe Memories', 2003, collection)); // Test the findByTandY function
+//console.log('Calling the findByTandY function ', findByTandY('In Love and Death', '2003', collection)); // Test the findByTandY function
 
 // Function that searches by Track AND Year
 function findByTrackAndYear(track, year, array) {
+    year = Number(year);
     let arr = collectionCheck(array); // variable for the array argument
     let results = [];
     for (let target of arr) {
@@ -330,7 +350,7 @@ function findByTrackAndYear(track, year, array) {
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
-  console.log('%cCalling findByTrackAndYear function for Big Shot in 1978', 'color: #66ff00', findByTrackAndYear('Big Shot', 1978));
+  console.log('%cCalling findByTrackAndYear function for Big Shot in 1978', 'color: #66ff00', findByTrackAndYear('Big Shot', '1978'));
   console.log('%cCalling findByTrackAndYear function for Big Shot in 1980 (Should not exist)', 'color: #FF0000', findByTrackAndYear('Big Shot', 1980));
 
   // Function that searches by Track AND Title
@@ -357,7 +377,7 @@ function findByTrackAndTitle(track, title, array) {
 function findByATY(artist, title, year, array) {
   let findArtist = artist; // variable for artist argument
   let findTitle = title; // variable for title argument
-  let findYear = year; // variable for year argument
+  let findYear = Number(year); // variable for year argument
   let arr = collectionCheck(array); // variable for the array argument
   let results = []; // empty array for search results
   for (let target of arr) {
@@ -380,7 +400,7 @@ function findByATY(artist, title, year, array) {
   return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
-//console.log('Calling the findByATY function ', findByATY('AFI', 'Sing The Sorrow', 2003, collection)); // Testing findByATY function
+console.log('Calling the findByATY function ', findByATY('AFI', 'Sing The Sorrow', '2003', collection)); // Testing findByATY function
 
 // This function checks if the passed array is empty and assigns a default value if it was
 // Returns original array passed if it isn't empty
@@ -428,7 +448,7 @@ function search(object, array) {
   } else if (hasArt === false && hasTitle === false && hasYear && hasTrack === false) {
     // if year used to search
     console.log(`Search Parameters: ${target.year}`); // Log search parameters used
-    return findByYear(target.year, arr); // Return results of findByYear function
+    return findByYear(Number(target.year), arr); // Return results of findByYear function
   } else if (hasArt && hasTitle && hasYear === false && hasTrack === false) {
     // if artist and title used to search
     console.log(`Search Parameters: ${target.artist} and ${target.title}`); // Log search parameters
@@ -436,17 +456,17 @@ function search(object, array) {
   } else if (hasArt && hasTitle === false && hasYear && hasTrack === false) {
     // if artist and year used to search
     console.log(`Search Parameters: ${target.artist} and ${target.year}`); // log search parameters
-    return findByAandY(target.artist, target.year, arr); // returns results of findByAandY
+    return findByAandY(target.artist, Number(target.year), arr); // returns results of findByAandY
   } else if (hasArt === false && hasTitle && hasYear && hasTrack === false) {
     // if title and year used to search
     console.log(`Search Parameters: ${target.title} and ${target.year}`); // Log search parameters used
-    return findByTandY(target.title, target.year, arr); // return results of function findByTandY
+    return findByTandY(target.title, Number(target.year), arr); // return results of function findByTandY
   } else if (hasArt && hasTitle && hasYear && hasTrack === false) {
     // if artist, title and year used to search
     console.log(
       `Search Parameters: ${target.artist}, ${target.title} and ${target.year}`
     ); // Log search parameters used
-    return findByATY(target.artist, target.title, target.year, arr); // Return results of findByATY function
+    return findByATY(target.artist, target.title, Number(target.year), arr); // Return results of findByATY function
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
     console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #0096ff');
     return findByTrack(target.tracks, arr); // return results of findByTrack function
@@ -458,10 +478,13 @@ function search(object, array) {
     return findByTrackAndTitle(target.tracks, target.title, arr); // return results of findByTrackAndTitle function
   }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { // if track and year used to search
     console.log(`%cSearch Parameters: ${target.tracks} from ${target.year}`, 'color: #0096ff');
-    return findByTrackAndYear(target.tracks, target.year, arr); // return findByTrackAndYear function results
-  } else if (hasTrack && hasArt && hasTitle && hasYear === false) { // if track, artist and title used to search
+    return findByTrackAndYear(target.tracks, Number(target.year), arr); // return findByTrackAndYear function results
+  }   else if (hasTrack && hasArt && hasTitle && hasYear === false) { // if track, artist and title used to search
     console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist} on ${target.title}`, 'color: #0096ff');
     return findByTrackArtTitle(target.tracks, target.artist, target.title, arr); // return findByTrackAndYear function results
+  }   else if (hasTrack && hasArt === false && hasTitle && hasYear) { // if track, artist and title used to search
+    console.log(`%cSearch Parameters: ${target.tracks} on ${target.title} from ${target.year}`, 'color: #0096ff');
+    return findByTrackTitleYear(target.tracks, target.title, Number(target.year), arr); // return findByTrackAndYear function results
   }
 } // end search Function
 
@@ -479,7 +502,7 @@ console.log(
   "Search Results: ",
   search({ artist: "HOLLYWOOD UNDEAD", year: 2008 }, collection)
 );
-console.log("Search Results: ", search({ title: "glass houses", year: 1980 }));
+console.log("Search Results: ", search({ title: "glass houses", year: '1980' }));
 console.log("Search Results: ", search({ artist: "Billy Joel" }, collection));
 console.log("Search Results: ", search({ title: "52nd Street" }, collection));
 console.log("Search Results: ", search({ year: 2003 }, collection));
@@ -508,10 +531,12 @@ console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Listening',
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Listening', artist: 'AFI'}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', title: "Ropin' The Wind"}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Rodeo', title: "Glass Houses"}, collection));
-console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', year: 1991}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Rodeo', year: '1991'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Rodeo', year: 2000}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Take It Away', artist: 'The Used', title: 'In Love and Death'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Take It Away', artist: 'Garth Brooks', title: 'In Love and Death'}, collection));
+console.log('%cSearch Results: ', 'color: #66ff00', search({tracks: 'Undead', title: 'Swan Songs', year: 2008}, collection));
+console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Big Shot', title: 'Swan Songs', year: 2008}, collection));
 
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
@@ -521,7 +546,7 @@ function addTrack(trackArr, artist, title, year, array) {
   let addTrack = trackArr; // variable for array of objects argument
   let addArtist = artist; // variable for artist argument
   let addTitle = title; // variable for title argument
-  let addYear = year; // variable for year argument
+  let addYear = Number(year); // variable for year argument
   let arr = collectionCheck(array); // sets a default collection if no collection passed
   let addTo = []; // empty array to store tracks for first time adding
   let songExist = false; // toggle if track matched existing track
@@ -594,7 +619,7 @@ console.log(
     ],
     "AFI",
     "Sing The Sorrow",
-    2003,
+    '2003',
     collection
   )
 );
@@ -707,7 +732,7 @@ Can I use find or index array methods to check for matching album?? See week 3 o
 13*
 12*
 1*
-234
+234*
 24*
 23*
 2*
