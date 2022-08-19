@@ -430,16 +430,16 @@ function search(object, array) {
     return findByATY(target.artist, target.title, target.year, arr); // Return results of findByATY function
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
     console.log(`%cSearch Parameters: ${target.tracks}`, 'color: #0096ff');
-    return findByTrack(target.tracks, arr);
-  } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) {
+    return findByTrack(target.tracks, arr); // return results of findByTrack function
+  } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) { // if track and artist were used to search
     console.log(`%cSearch Parameters: ${target.tracks} by ${target.artist}`, 'color: #0096ff');
-    return findByTrackAndArt(target.tracks, target.artist, arr);
-  }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) {
+    return findByTrackAndArt(target.tracks, target.artist, arr); // return findByTrackAnd Art function
+  }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) { // if track and title were used to search
     console.log(`%cSearch Parameters: ${target.tracks} on ${target.title}`, 'color: #0096ff');
-    return findByTrackAndTitle(target.tracks, target.title, arr);
-  }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) {
+    return findByTrackAndTitle(target.tracks, target.title, arr); // return results of findByTrackAndTitle function
+  }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { // if track and year used to search
     console.log(`%cSearch Parameters: ${target.tracks} from ${target.year}`, 'color: #0096ff');
-    return findByTrackAndYear(target.tracks, target.year, arr);
+    return findByTrackAndYear(target.tracks, target.year, arr); // return findByTrackAndYear function results
   }
 } // end search Function
 
@@ -499,64 +499,68 @@ function addTrack(trackArr, artist, title, year, array) {
   let addTitle = title; // variable for title argument
   let addYear = year; // variable for year argument
   let arr = collectionCheck(array); // sets a default collection if no collection passed
-  let addTo = [];
-  let songExist = false;
-  let whereAdd;
-  let songsAdded = [];
-  let rejectSong = [];
-  let firstAdd = false;
-  for (let tryAdd of addTrack) {
-    let songAdd = tryAdd.trackName;
-    for (let target of arr) {
-      if (target.hasOwnProperty("tracks")) {
-        let trackArr = Object.values(target.tracks);
-        for (let song of trackArr) {
+  let addTo = []; // empty array to store tracks for first time adding
+  let songExist = false; // toggle if track matched existing track
+  let whereAdd; // variable for matching object
+  let songsAdded = []; // empty array for songs that get added to an album
+  let rejectSong; // variable for songs that already exist
+  let firstAdd = false; // toggle for first time a track is added to album
+  for (let tryAdd of addTrack) { // for loop to go through multiple songs being added
+    let songAdd = tryAdd.trackName; // variable for trackName property of tracks array of objects
+    for (let target of arr) { // for loop to go through each album
+      if (target.hasOwnProperty("tracks")) { // check if album has tracks
+        let trackArr = Object.values(target.tracks); // variable for array of objects to go through all track on album
+        for (let song of trackArr) { // for loop to go through each song on album
           if (
-            song.trackName === songAdd &&
+            song.trackName === songAdd && // check is all artist, title, year and track name exists
             target.artist === addArtist &&
             target.title === addTitle &&
             target.year === addYear
           ) {
-            songExist = true;
-            rejectSong = songAdd;
+            songExist = true; // toggle songExists
+            rejectSong = songAdd; // variable for song that was rejected
           }
         }
-      } else if (
+      } else if ( // checks if matching artist, title and year but doesn't have existing tracks
         target.hasOwnProperty("tracks") === false &&
         target.artist === addArtist &&
         target.title === addTitle &&
         target.year === addYear
       ) {
-        whereAdd = findByATY(addArtist, addTitle, addYear, arr);
-        addTo.push(tryAdd);
-        whereAdd[0].tracks = addTo;
-        firstAdd = true;
+        whereAdd = findByATY(addArtist, addTitle, addYear, arr); // check if artist, title and year matches
+        addTo.push(tryAdd); // add track to addTo array
+        whereAdd[0].tracks = addTo; // sets tracks property to array of objects
+        firstAdd = true; // set toggle
       }
     }
-    if (songExist) {
+    if (songExist) { // message if track was found in collection already
       console.warn(
         `${rejectSong} already exists! It was not added to collection.`
       );
-    } else if (firstAdd) {
+    } else if (firstAdd) { // add song if artist, title and year match but album didn't have track property
         songsAdded.push(tryAdd);
-        firstAdd = false;
+        firstAdd = false; // resest toggle
     } else {
-      for (let i = 0; i < arr.length; i++) {
+      for (let i = 0; i < arr.length; i++) { // for loop to check collection for matches for song that wasn't duplicate or first track for album
         if (
-          arr[i].artist === addArtist &&
+          arr[i].artist === addArtist && // Check that artist, title and year match before adding track
           arr[i].title === addTitle &&
           arr[i].year === addYear
         ) {
           arr[i].tracks.push(tryAdd);
+          songsAdded.push(tryAdd); // add songs that was added to an array
         }
       }
-      songsAdded.push(tryAdd); // add songs that was added to an array
+      if (songsAdded.indexOf(tryAdd) < 0) { // Check if song wasn't added, display message
+        console.warn(`${tryAdd.trackName} by ${artist} on album: ${title} from ${year} did not match any records! It was not added to collection.`);
+      }
     }
     songExist = false; // resest toggle
   }
   return songsAdded; // returns which songs were added successfully
 } // end addTrack function
 
+// Test logs for addTrack function
 console.log(
   "%cAdding tracks to AFI - Sing The Sorrow", 'color: #66ff00',
   addTrack(
@@ -570,7 +574,6 @@ console.log(
     collection
   )
 );
-console.log('log collection: ', collection);
 console.log(
     "%cAdding tracks to AFI - Sing The Sorrow", 'color: #66ff00',
     addTrack(
@@ -584,13 +587,12 @@ console.log(
       collection
     )
   );
-  console.log('logging collection', collection);
 console.warn(
   "Trying to add tracks with bad info ",
   addTrack(
     [
-      { trackName: "testSong1", time: "4:18" },
-      { trackName: "testSong2", time: "3:48" },
+      { trackName: "Big Shot", time: "4:18" },
+      { trackName: "fakeSong", time: "3:48" },
     ],
     "Billy Joel",
     "52nd Street",
@@ -603,7 +605,6 @@ console.log(
   "Checking if tracks were added to Billy Joel - 52nd Street (Should only have 2)",
   collection[0].tracks
 );
-console.log("Collection ", collection);
 console.log(
   "Trying to add duplicate tracks to Billy Joel - 52nd Street",
   addTrack(
@@ -617,28 +618,55 @@ console.log(
     collection
   )
 );
-console.log("Collection ", collection);
 console.log("Tracks for Billy Joel - 52nd Street", collection[0].tracks);
-/*console.log(
-  "Testing if duplicate will add",
-  addTrack(
-    [
-      { trackName: "Bleed Black", time: "4:18" },
-      { trackName: "Girls Not Grey", time: "3:48" },
-    ],
-    "AFI",
-    "Sing The Sorrow",
-    2003,
-    collection
-  )
-);*/
-console.log("AFI - Sing The Sorrow tracks are: ", collection[4].tracks);
-console.log(collection);
-
 showCollection(collection);
-console.log(findByArtist("Billy Joel"));
-console.log(findByTitle("52nd Street"));
+//console.log(findByArtist("Billy Joel"));
+//console.log(findByTitle("52nd Street"));
 console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
+
+// Sort a collection by year function
+function sortYear(array) { // sorts without changing original collection
+let sortYr = [...array].sort((a, b) => {
+    return a.year - b.year;
+});
+return sortYr; // return sorted collection
+}
+// Sort a collection by artist function
+function sortArtist (array) {
+let sortArt = [...array].sort((a, b) => { // sorts without changing original collection
+    let firstA = a.artist.toLowerCase(); // convert artist value to lowercase
+    let firstB = b.artist.toLowerCase(); // convert artist value to lowercase
+    if (firstA < firstB) { // compares letter for sorting
+        return -1;
+    } else if (firstA > firstB) {
+        return 1;
+    } else {
+    return 0;
+    }
+});
+return sortArt; // return sorted collection
+} // end sortArtist function
+
+// Sort a collection by title function
+function sortTitle (array) {
+let sortTitleCollection = [...array].sort((a, b) => { // sorts without changing original collection
+    let firstA = a.title.toLowerCase(); // convert title value to lowercase
+    let firstB = b.title.toLowerCase(); // convert title value to lowercase
+    if (firstA < firstB) { // compares letter for sorting
+        return -1;
+    } else if (firstA > firstB) {
+        return 1;
+    } else {
+        return 0;
+    }
+});
+return sortTitleCollection; // return sorted collection
+} // end sortTitle function
+
+//Logs to test sort functions
+console.log('Logging the sorted collection by YEAR', sortYear(collection));
+console.log('Logging the sorted collection by ARTIST', sortArtist(collection));
+console.log('Logging the sorted collection by TITLE', sortTitle(collection));
 
 // ********* CREATE A SINGLE TRACK ADD FUNCTION ************ //
 /* Make it accept song name as string, time as string, artist name, album title, year published and colleciton
