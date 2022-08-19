@@ -10,24 +10,24 @@ function addToCollection(title, artist, year, tracks) {
   let addTitle = title; // variable to for title argument
   let addArtist = artist; // variable for artist argument
   let pubYear = year; // variable for year argument
-  let addTracks = tracks;
-  let addObj = {};
-  if (tracks === undefined) {
+  let addTracks = tracks; // variable for track argument
+  let addObj = {}; // new empty object
+  if (tracks === undefined) { // check if tracks are not present
      addObj = {
-      // create new object
+      // create new object without tracks property
       title: addTitle, // title of album property
       artist: addArtist, // artist property
       year: pubYear, // year published property
     };
-  } else {
+  } else { // if tracks were present
      addObj = {
-      // create new object
+      // create new object with tracks property
       title: addTitle, // title of album property
       artist: addArtist, // artist property
       year: pubYear, // year published property
       tracks: addTracks, // array of tracks with name and duration properties
     };
-  }
+  } // end if else
   //console.log('This is what is being added', addObj); // tracking function logs
   //console.log('Collection prior to push', collection);
   collection.push(addObj); // add new object to array collection
@@ -35,6 +35,7 @@ function addToCollection(title, artist, year, tracks) {
 } // end addToCollection function
 
 // Test data for add to collection, adds 6 albums, logs collection after adding
+console.log('%c****** START OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   addToCollection("52nd Street", "Billy Joel", 1978, [
     { trackName: "Big Shot", time: "4:03" },
@@ -69,6 +70,7 @@ console.log(
   ])
 );
 console.log("%cCollection after adding ", 'color: #66ff00', collection);
+console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 //console.log("The 3rd albums in my collection is ", collection[2]);
 
 // Function that accepts an array and displays the number of objects
@@ -99,8 +101,9 @@ function showCollection(array) {
   } // end for loop
 } // end showCollection function
 }
-
+console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 showCollection(collection); // call showCollection function with collection array as argument
+console.log('%c****** END SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
 // Function that searchs the given array by artist and returns a
 // new array with any matching
@@ -119,6 +122,7 @@ function findByArtist(artist, array) {
 }
 
 // Test data for findByArtist search function
+console.log('%c****** START OF SEARCH BY ARTIST FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   "%cLets see if AFI is here (should return a result(mixed))", 'color: #66ff00',
   findByArtist("AfI", collection)
@@ -139,6 +143,7 @@ console.log(
   "%cLets see if Asking Alexandria is here (should return no result)", 'color: #ff0000',
   findByArtist("Asking Alexandria", collection)
 );
+console.log('%c****** END OF SEARCH BY ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
 // Function that searches by title
 function findByTitle(title, array) {
@@ -193,10 +198,12 @@ function findByTrack(track, array) {
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
+console.log('%c****** START OF FIND BY TRACK FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log('%cCalling findByTrack function for Bleed Black(should not exist yet)', 'color: #FF0000', findByTrack('Bleed Black'));
 console.log('%cCalling findByTrack function for LisTEning (mixed)', 'color: #66ff00', findByTrack('LisTEning'));
 console.log('%cCalling findByTrack function for RodEo', 'color: #66ff00', findByTrack('RodEo'));
 console.log('%cCalling findByTrack function for BIG SHOT', 'color: #66ff00', findByTrack('BIG SHOT'));
+console.log('%c****** END OF FIND BY TRACK FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -414,10 +421,10 @@ function findByTrackArtistTitleYear(track, artist, title, year, array) {
             for (let i = 0; i < trackArr.length; i++) { // for loop to walk through tracks array
                 if (trackArr[i].trackName.toLowerCase() === findTrack && target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle && target.year === addYear) { // check if trackName for current element of track array is equal to request track, artist, title and year matches
                     results.push(target); // push object to results array
-                }
-            }
-        }
-    }
+                } // end if
+            } // end for loop
+        } // end if
+    } // end for loop
     return results; // returns the new array of results or an empty array
   } // end findByTrackAndTitle Function
 
@@ -434,8 +441,8 @@ function collectionCheck(array) {
     return arrDefault; // returns "default" value
   } else {
     return arr; // returns original array passed if array not empty
-  }
-}
+  } // end if/else
+} // end collectionCheck function
 
 // Function that accepts an object properties as argument and an array.
 // Searches for object in array based on properties given - Search object may have properties in any order
@@ -550,7 +557,7 @@ console.log('%cSearch Results: ', 'color: #ff0000', search({tracks: 'Unfed', art
 console.log('%cSearch Results: ', 'color: #66ff00', search({artist: 'Hollywood Undead', tracks: 'Undead', year: '2008'}, collection));
 console.log('%cSearch Results: ', 'color: #66ff00', search({artist: 'Garth BRooks', tracks: 'In LonESOme Dove', title: "Ropin' The Wind", year: '1991'}, collection));
 console.log('%cSearch Results: ', 'color: #ff0000', search({artist: 'The Used', tracks: 'In Lonesome Dove', title: "Ropin' The Wind", year: '2005'}, collection));
-console.log(('%c****** END SEARCH FUNCTION TEST DATA ******'), 'background: #dfff00; color: #0096ff');
+console.log('%c****** END SEARCH FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
 // This function accepts track names and times as an array of object, an artist, album title, year published and collection.
 // It will then search the collection for matching artist, title and year then add the tracks
@@ -623,6 +630,7 @@ function addTrack(trackArr, artist, title, year, array) {
 } // end addTrack function
 
 // Test logs for addTrack function
+console.log('%c******** START ADD TRACK TO ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
 console.log(
   "%cAdding tracks to AFI - Sing The Sorrow", 'color: #66ff00',
   addTrack(
@@ -681,10 +689,11 @@ console.log(
   )
 );
 console.log("%cTracks for Billy Joel - 52nd Street", 'color: #66ff00', collection[0].tracks);
+console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
 showCollection(collection);
+console.log('%c****** END ADD TRACK TO ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 //console.log(findByArtist("Billy Joel"));
 //console.log(findByTitle("52nd Street"));
-console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
 
 // Sort a collection by year function
 function sortYear(array) { // sorts without changing original collection
@@ -726,10 +735,12 @@ return sortTitleCollection; // return sorted collection
 } // end sortTitle function
 
 //Logs to test sort functions
+console.log('%c******** START SORT FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
 console.log('%cLogging the sorted collection by YEAR', 'color: #66ff00', sortYear(collection));
 console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortArtist(collection));
 console.log('%cLogging the sorted collection by TITLE', 'color: #66ff00', sortTitle(collection));
 console.log('%cShowing collection itself is still unsorted', 'color: #66ff00', collection);
+console.log('%c****** END SORT FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
 // Function that removes a track from a matching album
 function removeTrack(track, artist, title, year, array) {
@@ -758,7 +769,9 @@ function removeTrack(track, artist, title, year, array) {
   } // end removeTrack Function
 
   // Test logs for removeTrack function
+  console.log('%c******** START REMOVE TRACK FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
   console.log('%cRemoving Bleed Black by AFI on Sing The Sorrow from 2003 ', 'color: #66ff00', removeTrack('Bleed Black', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
   console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
+  console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
