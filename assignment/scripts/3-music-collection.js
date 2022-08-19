@@ -35,6 +35,7 @@ function addToCollection(title, artist, year, tracks) {
 } // end addToCollection function
 
 // Test data for add to collection, adds 6 albums, logs collection after adding
+console.log('');
 console.log('%c****** START OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   addToCollection("52nd Street", "Billy Joel", 1978, [
@@ -101,6 +102,7 @@ function showCollection(array) {
   } // end for loop
 } // end showCollection function
 }
+console.log('');
 console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 showCollection(collection); // call showCollection function with collection array as argument
 console.log('%c****** END SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
@@ -122,6 +124,7 @@ function findByArtist(artist, array) {
 }
 
 // Test data for findByArtist search function
+console.log('');
 console.log('%c****** START OF SEARCH BY ARTIST FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   "%cLets see if AFI is here (should return a result(mixed))", 'color: #66ff00',
@@ -198,6 +201,8 @@ function findByTrack(track, array) {
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
+// Test logs for find by track function
+console.log('');
 console.log('%c****** START OF FIND BY TRACK FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log('%cCalling findByTrack function for Bleed Black(should not exist yet)', 'color: #FF0000', findByTrack('Bleed Black'));
 console.log('%cCalling findByTrack function for LisTEning (mixed)', 'color: #66ff00', findByTrack('LisTEning'));
@@ -524,6 +529,7 @@ function search(object, array) {
 
 // Search Function test logs
 // Output displays search PARAMETERS in BLUE, tests that SHOULD have results in GREEN, and tests that should NOT in RED
+console.log('');
 console.log('%c******** START SEARCH FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
 console.log("%cSearch Results: ", 'color: #ff0000', search({ artist: "Ray Charles", year: 1957 }));
 console.log("%cSearch Results: ", 'color: #66ff00', search({ artist: "Billy Joel", title: "52nd Street", year: 1978 }, collection));
@@ -630,6 +636,7 @@ function addTrack(trackArr, artist, title, year, array) {
 } // end addTrack function
 
 // Test logs for addTrack function
+console.log('');
 console.log('%c******** START ADD TRACK TO ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
 console.log(
   "%cAdding tracks to AFI - Sing The Sorrow", 'color: #66ff00',
@@ -735,6 +742,7 @@ return sortTitleCollection; // return sorted collection
 } // end sortTitle function
 
 //Logs to test sort functions
+console.log('');
 console.log('%c******** START SORT FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
 console.log('%cLogging the sorted collection by YEAR', 'color: #66ff00', sortYear(collection));
 console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortArtist(collection));
@@ -769,6 +777,7 @@ function removeTrack(track, artist, title, year, array) {
   } // end removeTrack Function
 
   // Test logs for removeTrack function
+  console.log('');
   console.log('%c******** START REMOVE TRACK FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
   console.log('%cRemoving Bleed Black by AFI on Sing The Sorrow from 2003 ', 'color: #66ff00', removeTrack('Bleed Black', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
@@ -799,11 +808,52 @@ function removeTitle(artist, title, year, array) {
     } else {
         return 'NO MATCHES FOUND! NO ALBUM REMOVED.';
     }
-  } // end findByYear Function
+  } // end removeTitle Function
 
+  // Remove album test data
+  console.log('');
   console.log('%c******** START REMOVE ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
   console.log('%cRemoving album Swan Songs (should be removed)', 'color: #ff6600', removeTitle('Hollywood Undead', 'Swan Songs', 2008));
   showCollection(collection);
   console.log('%cTesting remove album function ', 'color: #ff0000', removeTitle('Bollywood Undead', 'Swan Songs', 2008));
   showCollection(collection);
   console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+
+    // Remove Artist Function
+  // Function to search by Artist, Title AND Year
+function removeArtist(artist, array) {
+    let findArtist = artist.toLowerCase(); // variable for artist argument
+    let arr = collectionCheck(array); // variable for the array argument
+    let results = []; // empty array for search results
+    let removedTitle = [];
+    let didRemove = false;
+    for (let i = 0; i < arr.length; i++) {
+      // for loop that searchs through given array of objects
+      if ((arr[i].artist.toLowerCase() === findArtist)) {
+        // check if artist property matches artist given
+        removedTitle = arr.splice(i, 1);
+        results.push(removedTitle);
+        didRemove = true;
+      } // end if
+      if (didRemove) {
+        i = -1;
+        didRemove = false;
+      }
+    } // end for loop
+    if (results.length > 0) {
+        return `${removedTitle[0].artist} was successfully removed from the collection!`; // returns the new array of results or an empty array
+    } else {
+        return 'NO MATCHES FOUND! NO ARTIST REMOVED.';
+    }
+  } // end removeArtist Function
+
+  // Test logs for removeArtist function
+  console.log('');
+  console.log('%c******** START REMOVE ARTIST FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
+  console.log('%cRemoving artist AFI (should be removed)', 'color: #ff6600', removeArtist('AFI'));
+  showCollection(collection);
+  console.log('%cTrying to remove artist that does not exist ', 'color: #ff0000', removeArtist('JFI'));
+  showCollection(collection);
+  console.log('%cRemoving artist Billy Joel (should remove 2 listings)', 'color: #ff6600', removeArtist('Billy Joel'));
+  showCollection(collection);
+  console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
