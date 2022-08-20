@@ -1,9 +1,17 @@
 body {
     margin: 0 auto;
 }
-h2 {
-    color: green;
+h2, h3 {
+    color: red;
+    padding-left: 10px;
 }
 div {
-    background-color: red;
+    background-color: yellow;
+    border-radius: 7px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+p {
+    padding-left: 15px;
 }

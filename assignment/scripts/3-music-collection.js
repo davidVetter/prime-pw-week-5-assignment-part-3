@@ -77,6 +77,7 @@ console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'back
 document.getElementById('showBtn').style.display = 'block';
 document.getElementById('addTestCollectionBtn').style.display = 'none';
 document.getElementById('addMoreBtn').style.display = 'block';
+hideCollection();
 loadCollection();
 //console.log("The 3rd albums in my collection is ", collection[2]);
 }
@@ -111,8 +112,14 @@ function showCollection(array) {
 } // end showCollection function
 
 function showCollectionTest() {
-    collection = [];
+    let c = collection.length;
+    while (c >= 0){
+        collection.pop();
+        c--;
+    }
+    addMore === false;
     addTestCollection();
+    document.getElementById('addMoreBtn').style.display = 'block';
     console.log('');
     console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
     showCollection(collection); // call showCollection function with collection array as argument
@@ -707,10 +714,9 @@ console.log("%cTracks for Billy Joel - 52nd Street", 'color: #66ff00', collectio
 console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
 showCollection(collection);
 console.log('%c****** END ADD TRACK TO ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-document.getElementById('addMoreBtn').style.display = 'none';
 document.getElementById('showBtn').style.display = 'none';
-addMore = true;
 resetCollection();
+document.getElementById('addMoreBtn').style.display = 'none';
 //console.log(findByArtist("Billy Joel"));
 //console.log(findByTitle("52nd Street"));
 } // end addMoreData function
@@ -875,6 +881,8 @@ function removeArtist(artist, array) {
   console.log('%cRemoving artist Billy Joel (should remove 2 listings)', 'color: #ff6600', removeArtist('Billy Joel'));
   showCollection(collection);
   console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  hideCollection();
+  loadCollection();
   }
 
   //This function will write collection to index page
@@ -911,18 +919,11 @@ function removeArtist(artist, array) {
     document.getElementById('resetBtn').style.display = 'block';
     document.getElementById('showBtn').style.display = 'none';
     document.getElementById('hideBtn').style.display = 'block';
-    document.getElementById('addMoreBtn').style.display = 'block';
-    if (addMore) {
-        document.getElementById('addMoreBtn').style.display = 'none';
-    }
 }
 
 // This function reloads the collection being displayed
 function resetCollection() {
-    let hideList = document.getElementsByClassName('showList');
-    for (record of hideList) {
-        record.style.display = 'none';
-    }
+    hideCollection();
     loadCollection();
 }
 
@@ -968,8 +969,4 @@ function searchResults(array, search) {
   document.getElementById('resetBtn').style.display = 'block';
   document.getElementById('showBtn').style.display = 'none';
   document.getElementById('hideBtn').style.display = 'block';
-  document.getElementById('addMoreBtn').style.display = 'block';
-  if (addMore) {
-    document.getElementById('addMoreBtn').style.display = 'none';
-  }
 }
