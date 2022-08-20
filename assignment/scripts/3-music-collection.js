@@ -35,7 +35,6 @@ function addToCollection(title, artist, year, tracks) {
 } // end addToCollection function
 
 // Test data for add to collection, adds 6 albums, logs collection after adding
-console.log('');
 console.log('%c****** START OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   addToCollection("52nd Street", "Billy Joel", 1978, [
@@ -77,7 +76,7 @@ console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'back
 // Function that accepts an array and displays the number of objects
 // and their contents in a readable format
 function showCollection(array) {
-  let arr = array; // variable for the argument
+  let arr = collectionCheck(array); // variable for the argument
   let c = 0;
   console.log(`%cTOTAL COLLECTION: ${arr.length}`, 'background: #4e182f; color: #f09605'); // logs number in given array
   for (let record of arr) {
@@ -99,9 +98,9 @@ function showCollection(array) {
             }
         }
     c = 0;
-  } // end for loop
+  }
+} // end for loop
 } // end showCollection function
-}
 console.log('');
 console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 showCollection(collection); // call showCollection function with collection array as argument
@@ -765,15 +764,15 @@ function removeTrack(track, artist, title, year, array) {
                 if (trackArr[i].trackName.toLowerCase() === findTrack && target.artist.toLowerCase() === findArtist && target.title.toLowerCase() === findTitle && target.year === addYear) { // check if trackName for current element of track array is equal to request track, artist, title and year matches
                     results = trackArr.splice(i, 1); // sets returns equal to the song removed
                     target.tracks = trackArr; // sets track array to new array with track removed
-                }
-            }
-        }
-    }
+                } // end if
+            } // end for loop
+        } // end if
+    } // end for loop
     if (results.length < 1) {
         return 'NO MATCHES! NO TRACKS REMOVED.';
     } else {
     return results; // returns the track that was removed
-    }
+    } // end if/else
   } // end removeTrack Function
 
   // Test logs for removeTrack function
@@ -785,8 +784,7 @@ function removeTrack(track, artist, title, year, array) {
   showCollection(collection);
   console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
-  // Remove Album Function
-  // Function to search by Artist, Title AND Year
+  // Function to remove albums
 function removeTitle(artist, title, year, array) {
     let findArtist = artist.toLowerCase(); // variable for artist argument
     let findTitle = title.toLowerCase(); // variable for title argument
@@ -819,8 +817,7 @@ function removeTitle(artist, title, year, array) {
   showCollection(collection);
   console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 
-    // Remove Artist Function
-  // Function to search by Artist, Title AND Year
+// Function to remove all albums by Artist
 function removeArtist(artist, array) {
     let findArtist = artist.toLowerCase(); // variable for artist argument
     let arr = collectionCheck(array); // variable for the array argument
@@ -841,7 +838,7 @@ function removeArtist(artist, array) {
       }
     } // end for loop
     if (results.length > 0) {
-        return `${removedTitle[0].artist} was successfully removed from the collection!`; // returns the new array of results or an empty array
+        return `${artist.toUpperCase()} was successfully removed from the collection!`; // returns the new array of results or an empty array
     } else {
         return 'NO MATCHES FOUND! NO ARTIST REMOVED.';
     }
