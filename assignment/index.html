@@ -3,12 +3,23 @@
   <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="cogwheel.svg">
+    <link rel="stylesheet" href="style.css">
     <title>Week 5 Assignment</title>
     <script src="scripts/3-music-collection.js" charset="utf-8"></script>
   </head>
   <body>
     <h1>Week 5 Assignment - Part 3</h1>
     <p>See console for output.</p>
+    <button id="showBtn" onclick="loadCollection()" style="display: none">Show Collection</button>
+    <button id="addTestCollectionBtn" onclick="addTestCollection()">Add to Collection</button>
+    <button id="addMoreBtn" onclick="addMoreCollect()" style="display: none">Add More to Collection</button>
+    <div id="collectDiv"></div>
     <!-- Create an unordered list with any questions you have -->
+    <ol>
+      <li>Question #1</li>
+      <li>Question #2</li>
+    </ol>
+    <button id="resetBtn" onclick="resetCollection()" style="display: none">Refresh Collection</button>
+    <button id="hideBtn" onclick="hideCollection()" style="display: none">Hide Collection</button>
   </body>
 </html>

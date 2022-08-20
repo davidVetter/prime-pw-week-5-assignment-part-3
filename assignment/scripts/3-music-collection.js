@@ -2,6 +2,8 @@ console.log("***** Music Collection *****");
 
 let collection = []; // creating collection array
 let arrDefault = collection;
+let showToggle = false;
+let addMore = false;
 
 // Function that accepts an album title, artist and year published as
 // arguments and adds them to the array collection as objects
@@ -34,6 +36,7 @@ function addToCollection(title, artist, year, tracks) {
   return addObj; // return new object
 } // end addToCollection function
 
+function addTestCollection() {
 // Test data for add to collection, adds 6 albums, logs collection after adding
 console.log('%c****** START OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
@@ -71,7 +74,12 @@ console.log(
 );
 console.log("%cCollection after adding ", 'color: #66ff00', collection);
 console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+//loadCollection();
+document.getElementById('showBtn').style.display = 'block';
+document.getElementById('addTestCollectionBtn').style.display = 'none';
+document.getElementById('addMoreBtn').style.display = 'block';
 //console.log("The 3rd albums in my collection is ", collection[2]);
+}
 
 // Function that accepts an array and displays the number of objects
 // and their contents in a readable format
@@ -634,6 +642,7 @@ function addTrack(trackArr, artist, title, year, array) {
   return songsAdded; // returns which songs were added successfully
 } // end addTrack function
 
+function addMoreCollect() {
 // Test logs for addTrack function
 console.log('');
 console.log('%c******** START ADD TRACK TO ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
@@ -698,8 +707,13 @@ console.log("%cTracks for Billy Joel - 52nd Street", 'color: #66ff00', collectio
 console.log('%cCalling findByTrack function for Bleed Black(SHOULD EXIST NOW)', 'color: #66ff00', findByTrack('Bleed Black'));
 showCollection(collection);
 console.log('%c****** END ADD TRACK TO ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+document.getElementById('addMoreBtn').style.display = 'none';
+document.getElementById('showBtn').style.display = 'none';
+addMore = true;
+resetCollection();
 //console.log(findByArtist("Billy Joel"));
 //console.log(findByTitle("52nd Street"));
+} // end addMoreData function
 
 // Sort a collection by year function
 function sortYear(array) { // sorts without changing original collection
@@ -854,3 +868,68 @@ function removeArtist(artist, array) {
   console.log('%cRemoving artist Billy Joel (should remove 2 listings)', 'color: #ff6600', removeArtist('Billy Joel'));
   showCollection(collection);
   console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+
+
+  //This function will write collection to index page
+  function loadCollection() {
+    let arr = collection; // variable for the argument
+    let c = 0;
+    let div = document.querySelector('#collectDiv');
+    showToggle = false
+    //debugger;
+    if (showToggle === false) {
+    const head = document.createElement("h2");
+    head.className = 'showList';
+    head.innerText = `The total in this collection is ${arr.length}`;
+    div.appendChild(head);
+    for (let record of arr) {
+      // for loop to go through given array
+      const albTitles = document.createElement("h3");
+      albTitles.className = 'showList';
+      albTitles.innerText = `${record.title.toUpperCase()} by ${record.artist.toUpperCase()} from ${record.year}`;
+      div.appendChild(albTitles);
+      if (record.hasOwnProperty("tracks")) {
+          if (!(record.tracks === undefined)) {
+              while (c < record.tracks.length) {
+                  const song = document.createElement("p");
+                  song.className = 'showList';
+                  song.innerText = `${c + 1}. ${record.tracks[c].trackName.toUpperCase()} - ${record.tracks[c].time}`;
+                  div.appendChild(song);
+                  c++;
+              }
+          }
+      c = 0;
+    }
+  }
+}
+  showToggle = true;
+  document.getElementById('resetBtn').style.display = 'block';
+  document.getElementById('showBtn').style.display = 'none';
+  document.getElementById('hideBtn').style.display = 'block';
+  document.getElementById('addMoreBtn').style.display = 'block';
+  if (addMore) {
+    document.getElementById('addMoreBtn').style.display = 'none';
+  }
+}
+
+// This function reloads the collection being displayed
+function resetCollection() {
+    let hideList = document.getElementsByClassName('showList');
+    for (record of hideList) {
+        record.style.display = 'none';
+    }
+    showToggle = false;
+    loadCollection();
+}
+
+// This function hides the collection being displayed on index
+function hideCollection() {
+    let hideList = document.getElementsByClassName('showList');
+    for (record of hideList) {
+        record.style.display = 'none';
+    }
+    document.getElementById('showBtn').style.display = 'block';
+    document.getElementById('hideBtn').style.display = 'none';
+    document.getElementById('resetBtn').style.display = 'none';
+    showToggle === false;
+}
