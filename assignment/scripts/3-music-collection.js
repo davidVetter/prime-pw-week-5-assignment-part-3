@@ -2,7 +2,6 @@ console.log("***** Music Collection *****");
 
 let collection = []; // creating collection array
 let arrDefault = collection;
-let showToggle = false;
 let addMore = false;
 
 // Function that accepts an album title, artist and year published as
@@ -110,10 +109,15 @@ function showCollection(array) {
   }
 } // end for loop
 } // end showCollection function
-console.log('');
-console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
-showCollection(collection); // call showCollection function with collection array as argument
-console.log('%c****** END SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+
+function showCollectionTest() {
+    collection = [];
+    addTestCollection();
+    console.log('');
+    console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
+    showCollection(collection); // call showCollection function with collection array as argument
+    console.log('%c****** END SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+}
 
 // Function that searchs the given array by artist and returns a
 // new array with any matching
@@ -131,30 +135,17 @@ function findByArtist(artist, array) {
   return results; // returns the new array of results or an empty array
 }
 
+function artistTest() {
 // Test data for findByArtist search function
 console.log('');
 console.log('%c****** START OF SEARCH BY ARTIST FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
-console.log(
-  "%cLets see if AFI is here (should return a result(mixed))", 'color: #66ff00',
-  findByArtist("AfI", collection)
-);
-console.log(
-  "%cLets see if Billy Joel is here (should return a result)", 'color: #66ff00',
-  findByArtist("BiLly JOEl")
-);
-console.log(
-  "%cLets see if Elton John is here (should return no result)", 'color: #ff0000',
-  findByArtist("Elton John")
-);
-console.log(
-  "%cLets see if The Used is here (should return a result)", 'color: #66ff00',
-  findByArtist("The Used", collection)
-);
-console.log(
-  "%cLets see if Asking Alexandria is here (should return no result)", 'color: #ff0000',
-  findByArtist("Asking Alexandria", collection)
-);
+console.log("%cLets see if AFI is here (should return a result(mixed))", 'color: #66ff00', findByArtist("AfI", collection));
+console.log("%cLets see if Billy Joel is here (should return a result)", 'color: #66ff00', findByArtist("BiLly JOEl"));
+console.log("%cLets see if Elton John is here (should return no result)", 'color: #ff0000', findByArtist("Elton John"));
+console.log("%cLets see if The Used is here (should return a result)", 'color: #66ff00', findByArtist("The Used", collection));
+console.log("%cLets see if Asking Alexandria is here (should return no result)", 'color: #ff0000', findByArtist("Asking Alexandria", collection));
 console.log('%c****** END OF SEARCH BY ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+}
 
 // Function that searches by title
 function findByTitle(title, array) {
@@ -209,6 +200,7 @@ function findByTrack(track, array) {
     return results; // returns the new array of results or an empty array
 } // end findByYear Function
 
+function findTrackTest() {
 // Test logs for find by track function
 console.log('');
 console.log('%c****** START OF FIND BY TRACK FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
@@ -217,6 +209,7 @@ console.log('%cCalling findByTrack function for LisTEning (mixed)', 'color: #66f
 console.log('%cCalling findByTrack function for RodEo', 'color: #66ff00', findByTrack('RodEo'));
 console.log('%cCalling findByTrack function for BIG SHOT', 'color: #66ff00', findByTrack('BIG SHOT'));
 console.log('%c****** END OF FIND BY TRACK FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+}
 
 // Function that searchs by artist AND title
 function findByAandT(artist, title, array) {
@@ -761,6 +754,7 @@ let sortTitleCollection = [...array].sort((a, b) => { // sorts without changing 
 return sortTitleCollection; // return sorted collection
 } // end sortTitle function
 
+function sortTest() {
 //Logs to test sort functions
 console.log('');
 console.log('%c******** START SORT FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
@@ -769,6 +763,7 @@ console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortA
 console.log('%cLogging the sorted collection by TITLE', 'color: #66ff00', sortTitle(collection));
 console.log('%cShowing collection itself is still unsorted', 'color: #66ff00', collection);
 console.log('%c****** END SORT FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+}
 
 // Function that removes a track from a matching album
 function removeTrack(track, artist, title, year, array) {
@@ -796,6 +791,7 @@ function removeTrack(track, artist, title, year, array) {
     } // end if/else
   } // end removeTrack Function
 
+  function removeTrackTest() {
   // Test logs for removeTrack function
   console.log('');
   console.log('%c******** START REMOVE TRACK FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
@@ -804,6 +800,7 @@ function removeTrack(track, artist, title, year, array) {
   console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
   console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  }
 
   // Function to remove albums
 function removeTitle(artist, title, year, array) {
@@ -829,6 +826,7 @@ function removeTitle(artist, title, year, array) {
     }
   } // end removeTitle Function
 
+  function removeAlbumTest() {
   // Remove album test data
   console.log('');
   console.log('%c******** START REMOVE ALBUM FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
@@ -837,6 +835,7 @@ function removeTitle(artist, title, year, array) {
   console.log('%cTesting remove album function ', 'color: #ff0000', removeTitle('Bollywood Undead', 'Swan Songs', 2008));
   showCollection(collection);
   console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  }
 
 // Function to remove all albums by Artist
 function removeArtist(artist, array) {
@@ -865,6 +864,7 @@ function removeArtist(artist, array) {
     }
   } // end removeArtist Function
 
+  function removeArtistTest() {
   // Test logs for removeArtist function
   console.log('');
   console.log('%c******** START REMOVE ARTIST FUNCTION TEST DATA ********', 'background: #dfff00; color: #0096ff');
@@ -875,7 +875,7 @@ function removeArtist(artist, array) {
   console.log('%cRemoving artist Billy Joel (should remove 2 listings)', 'color: #ff6600', removeArtist('Billy Joel'));
   showCollection(collection);
   console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-
+  }
 
   //This function will write collection to index page
   function loadCollection(array) {
@@ -883,40 +883,38 @@ function removeArtist(artist, array) {
     let c = 0;
     let div = document.querySelector('#collectDiv');
     showToggle = false
-    //debugger;
-    if (showToggle === false) {
-    const head = document.createElement("h2");
-    head.className = 'showList';
-    head.innerText = `The total in this collection is ${arr.length}`;
-    div.appendChild(head);
-    for (let record of arr) {
-      // for loop to go through given array
-      const albTitles = document.createElement("h3");
-      albTitles.className = 'showList';
-      albTitles.innerText = `${record.title.toUpperCase()} by ${record.artist.toUpperCase()} from ${record.year}`;
-      div.appendChild(albTitles);
-      if (record.hasOwnProperty("tracks")) {
+      const head = document.createElement("h2");
+      head.className = "showList";
+      head.innerText = `The total in this collection is ${arr.length}`;
+      div.appendChild(head);
+      for (let record of arr) {
+        // for loop to go through given array
+        const albTitles = document.createElement("h3");
+        albTitles.className = "showList";
+        albTitles.innerText = `${record.title.toUpperCase()} by ${record.artist.toUpperCase()} from ${
+          record.year
+        }`;
+        div.appendChild(albTitles);
+        if (record.hasOwnProperty("tracks")) {
           if (!(record.tracks === undefined)) {
-              while (c < record.tracks.length) {
-                  const song = document.createElement("p");
-                  song.className = 'showList';
-                  song.innerText = `${c + 1}. ${record.tracks[c].trackName.toUpperCase()} - ${record.tracks[c].time}`;
-                  div.appendChild(song);
-                  c++;
-              }
+            while (c < record.tracks.length) {
+              const song = document.createElement("p");
+              song.className = "showList";
+              song.innerText = `${c + 1}. ${record.tracks[c].trackName.toUpperCase()} - ${record.tracks[c].time}`;
+              div.appendChild(song);
+              c++;
+            }
           }
-      c = 0;
+          c = 0;
+        }
+      }
+    document.getElementById('resetBtn').style.display = 'block';
+    document.getElementById('showBtn').style.display = 'none';
+    document.getElementById('hideBtn').style.display = 'block';
+    document.getElementById('addMoreBtn').style.display = 'block';
+    if (addMore) {
+        document.getElementById('addMoreBtn').style.display = 'none';
     }
-  }
-}
-  showToggle = true;
-  document.getElementById('resetBtn').style.display = 'block';
-  document.getElementById('showBtn').style.display = 'none';
-  document.getElementById('hideBtn').style.display = 'block';
-  document.getElementById('addMoreBtn').style.display = 'block';
-  if (addMore) {
-    document.getElementById('addMoreBtn').style.display = 'none';
-  }
 }
 
 // This function reloads the collection being displayed
@@ -925,7 +923,6 @@ function resetCollection() {
     for (record of hideList) {
         record.style.display = 'none';
     }
-    showToggle = false;
     loadCollection();
 }
 
@@ -938,24 +935,19 @@ function hideCollection() {
     document.getElementById('showBtn').style.display = 'block';
     document.getElementById('hideBtn').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
-    showToggle === false;
 }
-
+// Function that displays results of search Function on index
 function searchResults(array, search) {
     let arr = collectionCheck(array); // variable for the argument
     let c = 0;
     let div = document.querySelector('#collectDiv');
-    showToggle = false
     hideCollection();
-    //debugger;
-    if (showToggle === false) {
     const head = document.createElement("h2");
     head.className = 'showList';
     let convString = String(search);
     head.innerText = `Search Parameters: ${convString.toUpperCase()}`;
     div.appendChild(head);
-    for (let record of arr) {
-      // for loop to go through given array
+    for (let record of arr) { // for loop to go through given array
       const albTitles = document.createElement("h3");
       albTitles.className = 'showList';
       albTitles.innerText = `${record.title.toUpperCase()} by ${record.artist.toUpperCase()} from ${record.year}`;
@@ -972,9 +964,7 @@ function searchResults(array, search) {
           }
       c = 0;
     }
-  }
 }
-  showToggle = true;
   document.getElementById('resetBtn').style.display = 'block';
   document.getElementById('showBtn').style.display = 'none';
   document.getElementById('hideBtn').style.display = 'block';
