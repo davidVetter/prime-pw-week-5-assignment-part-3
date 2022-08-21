@@ -931,6 +931,14 @@ function removeArtist(artist, array) {
 
 // This function reloads the collection being displayed
 function resetCollection() {
+    let artist = document.getElementById('artistInput');
+    let title = document.getElementById('titleInput');
+    let year = document.getElementById('yearInput');
+    let tracks = document.getElementById('trackInput');
+    artist.value = '';
+    title.value = '';
+    year.value = '';
+    tracks = '';
     hideCollection();
     loadCollection();
 }
@@ -979,10 +987,10 @@ function searchResults(array, search) {
   document.getElementById('hideBtn').style.display = 'flex';
 }
 
-// Function to populate the search lists
+// Function to populate the search lists with artist, titles, year and tracks
 function searchLists(array) {
     clearSearchLists();
-    let arr = collectionCheck(array); // variable for the argument
+    let arr = collectionCheck(array); // checks if collection was given or default used
     let c = 0;
     let artList = document.getElementById('artistList');
     let titleList = document.getElementById('titleList');
@@ -992,8 +1000,8 @@ function searchLists(array) {
     let titleArr = [];
     let yearArr = [];
     let trackArr = [];
-    for (let record of arr) {
-        artArr.push(record.artist);
+    for (let record of arr) { // for loop that creates an array for each property filled with all
+        artArr.push(record.artist); // values for that property in collection 
         titleArr.push(record.title);
         yearArr.push(record.year);
         if (record.hasOwnProperty("tracks")) {
@@ -1006,11 +1014,11 @@ function searchLists(array) {
         c = 0;
       }
     }
-    let noDupArt = [...new Set(artArr)];
+    let noDupArt = [...new Set(artArr)]; // create a new array for each property only contains unique values
     let noDupTitle = [...new Set(titleArr)];
     let noDupYear = [...new Set(yearArr)];
     let noDupTrack = [...new Set(trackArr)];
-    for (let record of noDupArt) {
+    for (let record of noDupArt) { // write values for each property to its list
         const artist = document.createElement("option");
         artist.value = `${record}`;
         artList.appendChild(artist);
@@ -1032,6 +1040,7 @@ function searchLists(array) {
     }
 } // end searchLists function
 
+// Function that clears out the search lists
 function clearSearchLists() {
     let artList = document.getElementById('artistList');
     let titleList = document.getElementById('titleList');
@@ -1049,4 +1058,27 @@ function clearSearchLists() {
     while (tracksList.hasChildNodes()) {
         tracksList.removeChild(tracksList.firstChild);
     }
+}
+
+// Function to retrieve values from search fields
+
+function searchValues() {
+    let artist = document.getElementById('artistInput');
+    let title = document.getElementById('titleInput');
+    let year = document.getElementById('yearInput');
+    let tracks = document.getElementById('trackInput');
+    const searchObj = {};
+    if (!(artist.value === undefined || artist.value === '')) {
+        searchObj.artist = artist.value;
+    }
+    if (!(title.value === undefined || title.value === '')) {
+        searchObj.title = title.value;
+    }
+    if (!(year.value === undefined || year.value === '')) {
+        searchObj.year = year.value;
+    }
+    if (!(tracks.value === undefined || tracks.value === '')) {
+        searchObj.tracks = tracks.value;
+    }
+    search(searchObj);
 }
