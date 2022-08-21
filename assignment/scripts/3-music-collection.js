@@ -489,54 +489,88 @@ function search(object, array) {
     searchResults(findByArtist(target.artist, arr), `${target.artist}`);
     console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}`, 'color: #0096ff'); // Log search parameters used
     return findByArtist(target.artist, arr); // Return results of function findByArtist
+
   } else if (hasArt === false && hasTitle && hasYear === false && hasTrack === false) {
     // if title used to search
     searchResults(findByTitle(target.title, arr), `${target.title}`);
     console.log(`%cSearch Parameters: ${target.title.toUpperCase()}`, 'color: #0096ff'); // Log search parameters used
     return findByTitle(target.title, arr); // Return results of findByTitle function
+
   } else if (hasArt === false && hasTitle === false && hasYear && hasTrack === false) {
     // if year used to search
     searchResults(findByYear(target.year, arr), `${target.year}`);
     console.log(`%cSearch Parameters: ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByYear(Number(target.year), arr); // Return results of findByYear function
+
   } else if (hasArt && hasTitle && hasYear === false && hasTrack === false) {
     // if artist and title used to search
+    searchResults(findByAandT(target.artist, target.title, arr), `${target.title} -by- ${target.artist}`);
     console.log(`%cSearch Parameters: ${target.artist.toUpperCase()} and ${target.title.toUpperCase()}`, 'color: #0096ff'); // Log search parameters
     return findByAandT(target.artist, target.title, arr); // return results of findByAandT
+
   } else if (hasArt && hasTitle === false && hasYear && hasTrack === false) {
     // if artist and year used to search
+    searchResults(findByAandY(target.artist, Number(target.year), arr), `${target.artist} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.artist.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // log search parameters
     return findByAandY(target.artist, Number(target.year), arr); // returns results of findByAandY
+
   } else if (hasArt === false && hasTitle && hasYear && hasTrack === false) {
     // if title and year used to search
+    searchResults(findByTandY(target.title, Number(target.year), arr), `${target.title} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.title.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByTandY(target.title, Number(target.year), arr); // return results of function findByTandY
+
   } else if (hasArt && hasTitle && hasYear && hasTrack === false) {
     // if artist, title and year used to search
+    searchResults(findByATY(target.artist, target.title, Number(target.year), arr), `${target.title} -by- ${target.artist} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.artist.toUpperCase()}, ${target.title.toUpperCase()} and ${target.year}`, 'color: #0096ff'); // Log search parameters used
     return findByATY(target.artist, target.title, Number(target.year), arr); // Return results of findByATY function
+
   } else if (hasTrack && hasArt === false && hasTitle === false && hasYear === false) {
+    // if track used to search
+    searchResults(findByTrack(target.tracks, arr), `${target.tracks}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()}`, 'color: #0096ff');
     return findByTrack(target.tracks, arr); // return results of findByTrack function
-  } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) { // if track and artist were used to search
+
+  } else if (hasTrack && hasArt && hasTitle === false && hasYear === false) { 
+    // if track and artist were used to search
+    searchResults(findByTrackAndArt(target.tracks, target.artist, arr), `${target.tracks} -by- ${target.artist}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()}`, 'color: #0096ff');
     return findByTrackAndArt(target.tracks, target.artist, arr); // return findByTrackAnd Art function
-  }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) { // if track and title were used to search
+
+  }  else if (hasTrack && hasArt === false && hasTitle && hasYear === false) { 
+    // if track and title were used to search
+    searchResults(findByTrackAndTitle(target.tracks, target.title, arr), `${target.tracks} -on- ${target.title}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} on ${target.title.toUpperCase()}`, 'color: #0096ff');
     return findByTrackAndTitle(target.tracks, target.title, arr); // return results of findByTrackAndTitle function
-  }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { // if track and year used to search
+
+  }   else if (hasTrack && hasArt === false && hasTitle === false && hasYear) { 
+    // if track and year used to search
+    searchResults(findByTrackAndYear(target.tracks, Number(target.year), arr), `${target.tracks} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackAndYear(target.tracks, Number(target.year), arr); // return findByTrackAndYear function results
-  }   else if (hasTrack && hasArt && hasTitle && hasYear === false) { // if track, artist and title used to search
+
+  }   else if (hasTrack && hasArt && hasTitle && hasYear === false) { 
+    // if track, artist and title used to search
+    searchResults(findByTrackArtTitle(target.tracks, target.artist, target.title, arr), `${target.tracks} -on- ${target.title} -by- ${target.artist}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} on ${target.title.toUpperCase()}`, 'color: #0096ff');
     return findByTrackArtTitle(target.tracks, target.artist, target.title, arr); // return findByTrackAndYear function results
-  }   else if (hasTrack && hasArt === false && hasTitle && hasYear) { // if track, artist and title used to search
+
+  }   else if (hasTrack && hasArt === false && hasTitle && hasYear) { 
+    // if track, artist and title used to search
+    searchResults(findByTrackTitleYear(target.tracks, target.title, Number(target.year), arr), `${target.tracks} -on- ${target.title} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} on ${target.title.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackTitleYear(target.tracks, target.title, Number(target.year), arr); // return findByTrackAndYear function results
-  }   else if (hasTrack && hasArt && hasTitle === false && hasYear) { // if track, artist and title used to search
+
+  }   else if (hasTrack && hasArt && hasTitle === false && hasYear) { 
+    // if track, artist and title used to search
+    searchResults(findByTrackArtistYear(target.tracks, target.artist, Number(target.year), arr), `${target.tracks} -by- ${target.artist} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackArtistYear(target.tracks, target.artist, Number(target.year), arr); // return findByTrackAndYear function results
-  }   else if (hasTrack && hasArt && hasTitle && hasYear) { // if track, artist and title used to search
+
+  }   else if (hasTrack && hasArt && hasTitle && hasYear) { 
+    // if track, artist and title used to search
+    searchResults(findByTrackArtistTitleYear(target.tracks, target.artist, target.title, Number(target.year), arr), `${target.tracks} -on- ${target.title} -by- ${target.artist} -from- ${target.year}`);
     console.log(`%cSearch Parameters: ${target.tracks.toUpperCase()} by ${target.artist.toUpperCase()} on ${target.title.toUpperCase()} from ${target.year}`, 'color: #0096ff');
     return findByTrackArtistTitleYear(target.tracks, target.artist, target.title, Number(target.year), arr); // return findByTrackAndYear function results
   }
@@ -726,14 +760,16 @@ document.getElementById('addMoreBtn').style.display = 'none';
 
 // Sort a collection by year function
 function sortYear(array) { // sorts without changing original collection
-let sortYr = [...array].sort((a, b) => {
+    arr = collectionCheck(array);
+let sortYr = [...arr].sort((a, b) => {
     return a.year - b.year;
 });
 return sortYr; // return sorted collection
 }
 // Sort a collection by artist function
 function sortArtist (array) {
-let sortArt = [...array].sort((a, b) => { // sorts without changing original collection
+    arr = collectionCheck(array);
+let sortArt = [...arr].sort((a, b) => { // sorts without changing original collection
     let firstA = a.artist.toLowerCase(); // convert artist value to lowercase
     let firstB = b.artist.toLowerCase(); // convert artist value to lowercase
     if (firstA < firstB) { // compares letter for sorting
@@ -749,7 +785,8 @@ return sortArt; // return sorted collection
 
 // Sort a collection by title function
 function sortTitle (array) {
-let sortTitleCollection = [...array].sort((a, b) => { // sorts without changing original collection
+    arr = collectionCheck(array);
+let sortTitleCollection = [...arr].sort((a, b) => { // sorts without changing original collection
     let firstA = a.title.toLowerCase(); // convert title value to lowercase
     let firstB = b.title.toLowerCase(); // convert title value to lowercase
     if (firstA < firstB) { // compares letter for sorting
@@ -772,7 +809,7 @@ console.log('%cLogging the sorted collection by ARTIST', 'color: #66ff00', sortA
 console.log('%cLogging the sorted collection by TITLE', 'color: #66ff00', sortTitle(collection));
 console.log('%cShowing collection itself is still unsorted', 'color: #66ff00', collection);
 console.log('%c****** END SORT FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-}
+} // end sortTest function
 
 // Function that removes a track from a matching album
 function removeTrack(track, artist, title, year, array) {
@@ -810,7 +847,7 @@ function removeTrack(track, artist, title, year, array) {
   console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
   console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-  }
+  } // end removeTrackTest function
 
   // Function to remove albums
 function removeTitle(artist, title, year, array) {
@@ -846,7 +883,7 @@ function removeTitle(artist, title, year, array) {
   console.log('%cTesting remove album function ', 'color: #ff0000', removeTitle('Bollywood Undead', 'Swan Songs', 2008));
   showCollection(collection);
   console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-  }
+  } // end removeAlbumTest function
 
 // Function to remove all albums by Artist
 function removeArtist(artist, array) {
@@ -889,7 +926,7 @@ function removeArtist(artist, array) {
   console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
   hideCollection();
   loadCollection();
-  }
+  } // end removeArtistTest function
 
   //This function will write collection to index page
   function loadCollection(array) {
@@ -926,8 +963,11 @@ function removeArtist(artist, array) {
     document.getElementById('resetBtn').style.display = 'inline';
     document.getElementById('showBtn').style.display = 'none';
     document.getElementById('hideBtn').style.display = 'inline';
+    document.getElementById('sortArtBtn').style.display = 'inline';
+    document.getElementById('sortTitleBtn').style.display = 'inline';
+    document.getElementById('sortYearBtn').style.display = 'inline';
     searchLists();
-}
+} // end loadCollection function
 
 // This function reloads the collection being displayed
 function resetCollection() {
@@ -938,10 +978,10 @@ function resetCollection() {
     artist.value = '';
     title.value = '';
     year.value = '';
-    tracks = '';
+    tracks.value = '';
     hideCollection();
     loadCollection();
-}
+} // end resetCollection function
 
 // This function hides the collection being displayed on index
 function hideCollection() {
@@ -952,7 +992,11 @@ function hideCollection() {
     document.getElementById('showBtn').style.display = 'flex';
     document.getElementById('hideBtn').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
-}
+    document.getElementById('sortArtBtn').style.display = 'none';
+    document.getElementById('sortTitleBtn').style.display = 'none';
+    document.getElementById('sortYearBtn').style.display = 'none';
+} // end hideCollection function
+
 // Function that displays results of search Function on index
 function searchResults(array, search) {
     let arr = collectionCheck(array); // variable for the argument
@@ -984,8 +1028,11 @@ function searchResults(array, search) {
 }
   document.getElementById('resetBtn').style.display = 'inline';
   document.getElementById('showBtn').style.display = 'none';
-  document.getElementById('hideBtn').style.display = 'flex';
-}
+  document.getElementById('hideBtn').style.display = 'inline';
+  document.getElementById('sortArtBtn').style.display = 'none';
+  document.getElementById('sortTitleBtn').style.display = 'none';
+  document.getElementById('sortYearBtn').style.display = 'none';
+} // end searchResults functions
 
 // Function to populate the search lists with artist, titles, year and tracks
 function searchLists(array) {
@@ -1058,10 +1105,9 @@ function clearSearchLists() {
     while (tracksList.hasChildNodes()) {
         tracksList.removeChild(tracksList.firstChild);
     }
-}
+} // end clearSearchLists functions
 
 // Function to retrieve values from search fields
-
 function searchValues() {
     let artist = document.getElementById('artistInput');
     let title = document.getElementById('titleInput');
@@ -1081,4 +1127,17 @@ function searchValues() {
         searchObj.tracks = tracks.value;
     }
     search(searchObj);
+} // end searchValues functions
+
+// function to display sorted collection on index
+function showArtistSort() {
+    loadCollection(sortArtist());
+}
+
+function showTitleSort() {
+    loadCollection(sortTitle());
+}
+
+function showYearSort() {
+    loadCollection(sortYear());
 }
