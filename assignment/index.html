@@ -8,17 +8,24 @@
     <script src="scripts/3-music-collection.js" charset="utf-8"></script>
   </head>
   <body>
-    <h1>Week 5 Assignment - Part 3</h1>
+    <h1 id="glow">stretchTUNES</h1>
     <p>See console for output.</p>
-    <input type="search" id="artistInput"class="searchBtns" list="artistList" placeholder="Artist">
-    <input type="search" id="titleInput"class="searchBtns" list="titleList" placeholder="Title">
-    <input type="search" id="yearInput"class="searchBtns" list="yearList" placeholder="Year">
-    <input type="search" id="trackInput"class="searchBtns" list="trackList" placeholder="Track">
-    <datalist id="artistList"></datalist>
-    <datalist id="titleList"></datalist>
-    <datalist id="yearList"></datalist>
-    <datalist id="trackList"></datalist>
-    <button onclick="searchValues()">Search</button>
+    <!-- Create an unordered list with any questions you have -->
+    <ol>
+      <li>Where did the last week go?</li>
+    </ol>
+      <details>
+        <summary>Search?</summary>
+        <input type="search" id="artistInput" class="searchBtns" list="artistList" placeholder="Artist">
+        <input type="search" id="titleInput" class="searchBtns" list="titleList" placeholder="Title">
+        <input type="search" id="yearInput" class="searchBtns" list="yearList" placeholder="Year">
+        <input type="search" id="trackInput" class="searchBtns" list="trackList" placeholder="Track">
+        <datalist id="artistList"></datalist>
+        <datalist id="titleList"></datalist>
+        <datalist id="yearList"></datalist>
+        <datalist id="trackList"></datalist>
+        <button onclick="searchValues()">Search</button>
+      </details>
     <button id="showBtn" onclick="loadCollection()" style="display: none">Show Collection</button>
     <span id="hideRefresh">
       <button id="hideBtn" onclick="hideCollection()" style="display: none">Hide Collection</button>
@@ -27,13 +34,11 @@
       <button id="sortTitleBtn" onclick="showTitleSort()" style="display: none">Sort by Title</button>
       <button id="sortYearBtn" onclick="showYearSort()" style="display: none">Sort by Year</button>
     </span>
-    <button id="addTestCollectionBtn" onclick="addTestCollection()">Add to Collection</button>
-    <button id="addMoreBtn" onclick="addMoreCollect()" style="display: none">Add More to Collection</button>
+    <button id="addTestCollectionBtn" onclick="addTestCollection()">ADD SOME DATA</button>
+    <button id="addMoreBtn" onclick="addMoreCollect()" style="display: none">ADD MORE TRACKS</button>
+    <button id="removeTracks" onclick="removeTrackTest()" style="display: none">REMOVE SOME TRACKS</button>
+    <button id="removeArtist" onclick="removeArtistTest()" style="display: none">REMOVE ARTISTS</button>
+    <button id="removeAlbum" onclick="removeAlbumTest()" style="display: none">REMOVE ALBUMS</button>
     <div id="collectDiv"></div>
-    <!-- Create an unordered list with any questions you have -->
-    <ol>
-      <li>Where did the last week go?</li>
-      <li>Question #2</li>
-    </ol>
   </body>
 </html>

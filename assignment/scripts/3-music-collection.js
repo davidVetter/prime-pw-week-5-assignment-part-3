@@ -3,6 +3,9 @@ console.log("***** Music Collection *****");
 let collection = []; // creating collection array
 let arrDefault = collection;
 let addMore = false;
+let rmTrackToggle = false;
+let rmArtistToggle = false;
+let rmAlbumToggle = false;
 
 // Function that accepts an album title, artist and year published as
 // arguments and adds them to the array collection as objects
@@ -79,7 +82,7 @@ console.log("%cCollection after adding ", 'color: #66ff00', collection);
 console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
 document.getElementById('showBtn').style.display = 'block';
 document.getElementById('addTestCollectionBtn').style.display = 'none';
-document.getElementById('addMoreBtn').style.display = 'block';
+document.getElementById('addMoreBtn').style.display = 'inline';
 hideCollection();
 loadCollection();
 //console.log("The 3rd albums in my collection is ", collection[2]);
@@ -122,7 +125,7 @@ function showCollectionTest() {
     }
     addMore === false;
     addTestCollection();
-    document.getElementById('addMoreBtn').style.display = 'block';
+    document.getElementById('addMoreBtn').style.display = 'inline';
     console.log('');
     console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
     showCollection(collection); // call showCollection function with collection array as argument
@@ -830,6 +833,7 @@ function removeTrack(track, artist, title, year, array) {
             } // end for loop
         } // end if
     } // end for loop
+    document.getElementById('removeTracks').style.display = 'none';
     searchLists();
     if (results.length < 1) {
         return 'NO MATCHES! NO TRACKS REMOVED.';
@@ -847,6 +851,10 @@ function removeTrack(track, artist, title, year, array) {
   console.log('%cRemoving Bleed Green by AFI on Sing The Sorrow from 2003 ', 'color: #ff0000', removeTrack('Bleed Green', 'AFI', 'Sing The Sorrow', 2003, collection));
   showCollection(collection);
   console.log('%c****** END REMOVE TRACK FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  document.getElementById('removeTracks').style.display = 'none';
+  rmTrackToggle = true;
+  hideCollection();
+  loadCollection();
   } // end removeTrackTest function
 
   // Function to remove albums
@@ -883,6 +891,10 @@ function removeTitle(artist, title, year, array) {
   console.log('%cTesting remove album function ', 'color: #ff0000', removeTitle('Bollywood Undead', 'Swan Songs', 2008));
   showCollection(collection);
   console.log('%c****** END REMOVE ALBUM FROM ALBUM FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  document.getElementById('removeAlbum').style.display = 'none';
+  rmAlbumToggle = true;
+  hideCollection();
+  loadCollection();
   } // end removeAlbumTest function
 
 // Function to remove all albums by Artist
@@ -924,6 +936,8 @@ function removeArtist(artist, array) {
   console.log('%cRemoving artist Billy Joel (should remove 2 listings)', 'color: #ff6600', removeArtist('Billy Joel'));
   showCollection(collection);
   console.log('%c****** END REMOVE ARTIST FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
+  document.getElementById('removeArtist').style.display = 'none';
+  rmArtistToggle = true;
   hideCollection();
   loadCollection();
   } // end removeArtistTest function
@@ -966,6 +980,21 @@ function removeArtist(artist, array) {
     document.getElementById('sortArtBtn').style.display = 'inline';
     document.getElementById('sortTitleBtn').style.display = 'inline';
     document.getElementById('sortYearBtn').style.display = 'inline';
+    if (rmTrackToggle) {
+        document.getElementById('removeTracks').style.display = 'none';
+    } else {
+        document.getElementById('removeTracks').style.display = 'inline';
+    }
+    if (rmArtistToggle) {
+        document.getElementById('removeArtist').style.display = 'none';
+    } else {
+    document.getElementById('removeArtist').style.display = 'inline';
+    }
+    if (rmAlbumToggle) {
+        document.getElementById('removeAlbum').style.display = 'none';
+    } else {
+    document.getElementById('removeAlbum').style.display = 'inline';
+    }
     searchLists();
 } // end loadCollection function
 
@@ -1129,7 +1158,7 @@ function searchValues() {
     search(searchObj);
 } // end searchValues functions
 
-// function to display sorted collection on index
+// functions to display sorted collection on index
 function showArtistSort() {
     loadCollection(sortArtist());
 }
