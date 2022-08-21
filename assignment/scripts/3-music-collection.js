@@ -1,4 +1,5 @@
 console.log("***** Music Collection *****");
+console.log('*****PLEASE RUN prettyTest()*****');
 
 let collection = []; // creating collection array
 let arrDefault = collection;
@@ -124,7 +125,11 @@ function showCollectionTest() {
         c--;
     }
     addMore === false;
+    rmTrackToggle = false;
+    rmArtistToggle = false;
+    rmAlbumToggle = false;
     addTestCollection();
+    loadCollection();
     document.getElementById('addMoreBtn').style.display = 'inline';
     console.log('');
     console.log('%c****** START SHOW COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
@@ -1169,4 +1174,20 @@ function showTitleSort() {
 
 function showYearSort() {
     loadCollection(sortYear());
+} // end display sort functions
+
+// Pretty Test Function - Runs all the test logs and data in the correct order for
+// nice thorough console output of all required functions for Week 5 - Part 3
+function prettyTest() {
+    addTestCollection();
+    showCollectionTest();
+    artistTest();
+    findTrackTest();
+    searchTest();
+    addMoreCollect();
+    sortTest();
+    removeTrackTest();
+    removeAlbumTest();
+    removeArtistTest();
+    addTestCollection();
 }
