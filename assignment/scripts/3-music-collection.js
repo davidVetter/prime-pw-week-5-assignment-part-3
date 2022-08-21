@@ -37,6 +37,10 @@ function addToCollection(title, artist, year, tracks) {
 
 function addTestCollection() {
 // Test data for add to collection, adds 6 albums, logs collection after adding
+let arr = collection;
+while (arr.length > 0) {
+    arr.pop();
+};
 console.log('%c****** START OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #dfff00; color: #0096ff');
 console.log(
   addToCollection("52nd Street", "Billy Joel", 1978, [
@@ -73,7 +77,6 @@ console.log(
 );
 console.log("%cCollection after adding ", 'color: #66ff00', collection);
 console.log('%c****** END OF ADD TO COLLECTION FUNCTION TEST DATA ******', 'background: #0096ff; color: #dfff000');
-//loadCollection();
 document.getElementById('showBtn').style.display = 'block';
 document.getElementById('addTestCollectionBtn').style.display = 'none';
 document.getElementById('addMoreBtn').style.display = 'block';
@@ -790,6 +793,7 @@ function removeTrack(track, artist, title, year, array) {
             } // end for loop
         } // end if
     } // end for loop
+    searchLists();
     if (results.length < 1) {
         return 'NO MATCHES! NO TRACKS REMOVED.';
     } else {
@@ -825,6 +829,7 @@ function removeTitle(artist, title, year, array) {
       } // end if
       c++;
     } // end for loop
+    searchLists();
     if (removedTitle.length > 0) {
         return `${removedTitle[0].title} from ${removedTitle[0].year} by ${removedTitle[0].artist} was successfully removed from the collection!`; // returns the new array of results or an empty array
     } else {
@@ -863,6 +868,7 @@ function removeArtist(artist, array) {
         didRemove = false;
       }
     } // end for loop
+    searchLists();
     if (results.length > 0) {
         return `${artist.toUpperCase()} was successfully removed from the collection!`; // returns the new array of results or an empty array
     } else {
@@ -887,6 +893,7 @@ function removeArtist(artist, array) {
 
   //This function will write collection to index page
   function loadCollection(array) {
+    hideCollection();
     let arr = collectionCheck(array); // variable for the argument
     let c = 0;
     let div = document.querySelector('#collectDiv');
@@ -916,9 +923,10 @@ function removeArtist(artist, array) {
           c = 0;
         }
       }
-    document.getElementById('resetBtn').style.display = 'block';
+    document.getElementById('resetBtn').style.display = 'inline';
     document.getElementById('showBtn').style.display = 'none';
-    document.getElementById('hideBtn').style.display = 'block';
+    document.getElementById('hideBtn').style.display = 'inline';
+    searchLists();
 }
 
 // This function reloads the collection being displayed
@@ -933,7 +941,7 @@ function hideCollection() {
     while (div.hasChildNodes()) {
         div.removeChild(div.firstChild);
     }
-    document.getElementById('showBtn').style.display = 'block';
+    document.getElementById('showBtn').style.display = 'flex';
     document.getElementById('hideBtn').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
 }
@@ -966,7 +974,79 @@ function searchResults(array, search) {
       c = 0;
     }
 }
-  document.getElementById('resetBtn').style.display = 'block';
+  document.getElementById('resetBtn').style.display = 'inline';
   document.getElementById('showBtn').style.display = 'none';
-  document.getElementById('hideBtn').style.display = 'block';
+  document.getElementById('hideBtn').style.display = 'flex';
+}
+
+// Function to populate the search lists
+function searchLists(array) {
+    clearSearchLists();
+    let arr = collectionCheck(array); // variable for the argument
+    let c = 0;
+    let artList = document.getElementById('artistList');
+    let titleList = document.getElementById('titleList');
+    let yearList = document.getElementById('yearList');
+    let trackList = document.getElementById('trackList');
+    let artArr = [];
+    let titleArr = [];
+    let yearArr = [];
+    let trackArr = [];
+    for (let record of arr) {
+        artArr.push(record.artist);
+        titleArr.push(record.title);
+        yearArr.push(record.year);
+        if (record.hasOwnProperty("tracks")) {
+            if (!(record.tracks === undefined)) {
+                while (c < record.tracks.length) {
+                    trackArr.push(record.tracks[c].trackName);
+                    c++;
+                }
+            }
+        c = 0;
+      }
+    }
+    let noDupArt = [...new Set(artArr)];
+    let noDupTitle = [...new Set(titleArr)];
+    let noDupYear = [...new Set(yearArr)];
+    let noDupTrack = [...new Set(trackArr)];
+    for (let record of noDupArt) {
+        const artist = document.createElement("option");
+        artist.value = `${record}`;
+        artList.appendChild(artist);
+    }
+    for (let record of noDupTitle) {
+        const title = document.createElement("option");
+        title.value = `${record}`;
+        titleList.appendChild(title);
+    }
+    for (let record of noDupYear) {
+        const year = document.createElement("option");
+        year.value = `${record}`;
+        yearList.appendChild(year);
+    }
+    for (let record of noDupTrack) {
+        const song = document.createElement("option");
+        song.value = `${record}`;
+        trackList.appendChild(song);
+    }
+} // end searchLists function
+
+function clearSearchLists() {
+    let artList = document.getElementById('artistList');
+    let titleList = document.getElementById('titleList');
+    let yearList = document.getElementById('yearList');
+    let tracksList = document.getElementById('trackList');
+    while (artList.hasChildNodes()) {
+        artList.removeChild(artList.firstChild);
+    }
+    while (titleList.hasChildNodes()) {
+        titleList.removeChild(titleList.firstChild);
+    }
+    while (yearList.hasChildNodes()) {
+        yearList.removeChild(yearList.firstChild);
+    }
+    while (tracksList.hasChildNodes()) {
+        tracksList.removeChild(tracksList.firstChild);
+    }
 }

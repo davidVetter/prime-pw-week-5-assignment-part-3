@@ -10,7 +10,20 @@
   <body>
     <h1>Week 5 Assignment - Part 3</h1>
     <p>See console for output.</p>
+    <input type="search" id="artistInput"class="searchBtns" list="artistList" placeholder="Artist">
+    <input type="search" id="titleInput"class="searchBtns" list="titleList" placeholder="Title">
+    <input type="search" id="yearInput"class="searchBtns" list="yearList" placeholder="Year">
+    <input type="search" id="trackInput"class="searchBtns" list="trackList" placeholder="Track">
+    <datalist id="artistList"></datalist>
+    <datalist id="titleList"></datalist>
+    <datalist id="yearList"></datalist>
+    <datalist id="trackList"></datalist>
+    <button onclick="searchLists()">Search</button>
     <button id="showBtn" onclick="loadCollection()" style="display: none">Show Collection</button>
+    <span id="hideRefresh">
+      <button id="hideBtn" onclick="hideCollection()" style="display: none">Hide Collection</button>
+      <button id="resetBtn" onclick="resetCollection()" style="display: none">Refresh Collection</button>
+    </span>
     <button id="addTestCollectionBtn" onclick="addTestCollection()">Add to Collection</button>
     <button id="addMoreBtn" onclick="addMoreCollect()" style="display: none">Add More to Collection</button>
     <div id="collectDiv"></div>
@@ -19,7 +32,5 @@
       <li>Where did the last week go?</li>
       <li>Question #2</li>
     </ol>
-    <button id="resetBtn" onclick="resetCollection()" style="display: none">Refresh Collection</button>
-    <button id="hideBtn" onclick="hideCollection()" style="display: none">Hide Collection</button>
   </body>
 </html>
