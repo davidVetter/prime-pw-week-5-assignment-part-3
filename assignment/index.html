@@ -7,16 +7,20 @@
     <title>Week 5 Assignment</title>
     <script src="scripts/3-music-collection.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body id="bd">
     <main class="mainC">
     <h1 id="glow">stretchTUNES</h1>
-    <p>See console for output.</p>
+    <p id="welcome">Welcome to stretchTunes! <br /></p>
+    <p id="intro"><strong>To cut to the chase, click prettyTest button below for one click operation.</strong> Otherwise click start button and test some functions. The search accepts any combination for the 4 options. See console for additional functionality and output.
+      <span id="fNote">*Buttons with red hovers run test data.</span></p>
     <!-- Create an unordered list with any questions you have -->
     <ol>
       <li>Where did the last week go?</li>
+      <li>Perform all assignment requirements?&nbsp;<button id="prettyBtn" onclick="prettyTest()">prettyTest</button></li>
     </ol>
-      <details>
-        <summary>Search?</summary>
+    <div id="dBlock">
+      <details id="sBar">
+        <summary><span id="srchDtl">Search</span></summary>
         <input type="search" id="artistInput" class="searchBtns" list="artistList" placeholder="Artist">
         <input type="search" id="titleInput" class="searchBtns" list="titleList" placeholder="Title">
         <input type="search" id="yearInput" class="searchBtns" list="yearList" placeholder="Year">
@@ -25,22 +29,26 @@
         <datalist id="titleList"></datalist>
         <datalist id="yearList"></datalist>
         <datalist id="trackList"></datalist>
-        <button onclick="searchValues()">Search</button>
+        <button onclick="searchValues()" id="sBtn">Search</button>
+        <button id="resetBtn" onclick="resetCollection()" style="display: none">Clear Results</button>
       </details>
+    </div>
     <button id="showBtn" onclick="loadCollection()" style="display: none">Show Collection</button>
     <span id="hideRefresh">
       <button id="hideBtn" onclick="hideCollection()" style="display: none">Hide Collection</button>
-      <button id="resetBtn" onclick="resetCollection()" style="display: none">Clear Results</button>
       <button id="sortArtBtn" onclick="showArtistSort()" style="display: none">Sort by Artist</button>
       <button id="sortTitleBtn" onclick="showTitleSort()" style="display: none">Sort by Title</button>
       <button id="sortYearBtn" onclick="showYearSort()" style="display: none">Sort by Year</button>
     </span>
-    <button id="addTestCollectionBtn" onclick="addTestCollection()">ADD SOME DATA</button>
-    <button id="addMoreBtn" onclick="addMoreCollect()" style="display: none">ADD MORE TRACKS</button>
-    <button id="removeTracks" onclick="removeTrackTest()" style="display: none">REMOVE SOME TRACKS</button>
-    <button id="removeArtist" onclick="removeArtistTest()" style="display: none">REMOVE ARTISTS</button>
-    <button id="removeAlbum" onclick="removeAlbumTest()" style="display: none">REMOVE ALBUMS</button>
+    <button id="addTestCollectionBtn" class="botBtn" onclick="addTestCollection()">START</button>
+    <button id="addMoreBtn" class="botBtn" onclick="addMoreCollect()" style="display: none">ADD MORE TRACKS</button>
+    <button id="removeTracks" class="botBtn" onclick="removeTrackTest()" style="display: none">REMOVE SOME TRACKS</button>
+    <button id="removeArtist" class="botBtn" onclick="removeArtistTest()" style="display: none">REMOVE ARTISTS</button>
+    <button id="removeAlbum" class="botBtn" onclick="removeAlbumTest()" style="display: none">REMOVE ALBUMS</button>
     <div id="collectDiv"></div>
     </main>
+    <footer>
+      <p>Copyright &copy; David Vetter 2022</p>
+    </footer>
   </body>
 </html>

@@ -1190,4 +1190,4 @@ function prettyTest() {
     removeAlbumTest();
     removeArtistTest();
     addTestCollection();
-}
+} // end of prettyTest function
